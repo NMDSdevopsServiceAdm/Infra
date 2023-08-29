@@ -28,8 +28,8 @@ resource "aws_codepipeline" "codepipeline" {
       output_artifacts = ["source_output"]
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
-        FullRepositoryId = "NMDSdevopsServiceAdm/SFC-Migration-Test"
-        BranchName       = "main"
+        FullRepositoryId = "NMDSdevopsServiceAdm/Infra"
+        BranchName       = "feat/terraform-pipeline"
       }
     }
   }

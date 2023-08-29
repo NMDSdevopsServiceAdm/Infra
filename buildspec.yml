@@ -4,7 +4,10 @@ phases:
   install:
     commands:
     # Install Terraform
-    - uname -a
+    - sudo yum install -y yum-utils shadow-utils
+    - sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+    - sudo yum -y install terraform
+    - terraform --version
   pre_build:
     commands:
     # Assume role

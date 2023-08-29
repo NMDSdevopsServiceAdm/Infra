@@ -28,3 +28,9 @@ module "backend" {
 module "networking" {
   source = "../../modules/networking"
 }
+
+module "pipeline" {
+  source = "../../modules/pipeline"
+
+  environment = var.environment
+}

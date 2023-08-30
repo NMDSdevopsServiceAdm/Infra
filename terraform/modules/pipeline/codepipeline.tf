@@ -121,7 +121,7 @@ data "aws_iam_policy_document" "codepipeline_policy" {
 
   statement {
     effect    = "Allow"
-    actions   = ["codestar-connections:UseConnection"]
+    actions   = ["codestar-connections:UseConnection", "codestar-connections:GetConnection"]
     resources = [aws_codestarconnections_connection.codestar_github.arn]
   }
 
@@ -131,6 +131,16 @@ data "aws_iam_policy_document" "codepipeline_policy" {
     actions = [
       "codebuild:BatchGetBuilds",
       "codebuild:StartBuild",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "iam:GetRole",
     ]
 
     resources = ["*"]

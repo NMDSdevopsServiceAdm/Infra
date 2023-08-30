@@ -14,3 +14,6 @@ phases:
   build:
     commands:
     # tf init && tf apply autoaproove
+    - cd terraform/environment/non-prod
+    - terraform init
+    - terraform plan

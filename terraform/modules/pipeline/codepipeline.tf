@@ -49,7 +49,7 @@ resource "aws_codepipeline" "codepipeline" {
       configuration = {
         ProjectName = "test"
       }
-      role_arn = aws_iam_role.codepipeline_role.arn
+      role_arn = aws_iam_role.codebuild_role.arn
     }
   }
 

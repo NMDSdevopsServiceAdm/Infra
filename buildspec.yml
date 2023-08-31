@@ -17,6 +17,6 @@ phases:
     # tf init && tf fmt/plan
     - cd terraform/environment/non-prod
     - terraform init
-    - terraform fmt
+    - terraform fmt -check 
     - terraform plan
     

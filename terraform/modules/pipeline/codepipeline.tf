@@ -5,7 +5,7 @@ resource "aws_codestarconnections_connection" "codestar_github" {
 
 resource "aws_codepipeline" "codepipeline" {
   name     = "tf-test-pipeline"
-  role_arn = aws_iam_role.codepipeline_role.arn
+  role_arn = aws_iam_role.codebuild_role.arn
 
   artifact_store {
     location = aws_s3_bucket.codepipeline_bucket.bucket

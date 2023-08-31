@@ -193,7 +193,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "iam:*",
     ]
 
-    resources = ["arn:aws:iam::914197850242:role/test-role"]
+    resources = ["arn:aws:iam::914197850242:role/code-build-service-role"]
   }
 }
 

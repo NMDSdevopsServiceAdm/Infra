@@ -93,10 +93,10 @@ data "aws_iam_policy_document" "assume_role" {
       identifiers = ["codebuild.amazonaws.com","codepipeline.amazonaws.com"]
     }
 
-    # principals {
-    #   type        = "AWS"
-    #   identifiers = ["arn:aws:iam::914197850242:role/CodeBuildServiceRole"]
-    # }
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::914197850242:role/CodeBuildServiceRole"]
+    }
 
     actions = ["sts:AssumeRole"]
   }

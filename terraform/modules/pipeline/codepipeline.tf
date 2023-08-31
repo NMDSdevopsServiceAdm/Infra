@@ -90,13 +90,13 @@ data "aws_iam_policy_document" "assume_role" {
 
     principals {
       type        = "Service"
-      identifiers = ["codepipeline.amazonaws.com"]
+      identifiers = ["codebuild.amazonaws.com","codepipeline.amazonaws.com"]
     }
 
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::914197850242:role/code-build-service-role"]
-    }
+    # principals {
+    #   type        = "AWS"
+    #   identifiers = ["arn:aws:iam::914197850242:role/CodeBuildServiceRole"]
+    # }
 
     actions = ["sts:AssumeRole"]
   }
@@ -108,7 +108,7 @@ resource "aws_iam_role" "codepipeline_role" {
 }
 
 resource "aws_iam_role" "codebuild_role" {
-  name               = "code-build-service-role"
+  name               = "CodeBuildServiceRole"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -193,7 +193,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "iam:*",
     ]
 
-    resources = ["arn:aws:iam::914197850242:role/code-build-service-role"]
+    resources = [aws_iam_role.codebuild_role.arn]
   }
 }
 

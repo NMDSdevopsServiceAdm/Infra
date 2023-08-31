@@ -7,8 +7,6 @@ terraform {
     bucket = "terraform-state-sfc"
     key    = "state/terraform.tfstate"
     region = "eu-west-1"
-    access_key = "<access-key>"
-    secret_key = "<secret-key>"
   }
 }
 # module "frontend" {

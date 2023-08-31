@@ -193,7 +193,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "iam:*",
     ]
 
-    resources = [aws_iam_role.codepipeline_role.arn]
+    resources = [aws_iam_role.codepipeline_role.arn, aws_iam_role.codebuild_role.arn]
   }
 }
 

@@ -1,5 +1,5 @@
 resource "aws_codestarconnections_connection" "codestar_github" {
-  name          = "GitHub"
+                                                                          name          = "GitHub"
   provider_type = "GitHub"
 }
 
@@ -108,4 +108,4 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
 
 # data "aws_kms_alias" "s3kmskey" {
 #   name = "alias/myKmsKey"
-# }
+ }

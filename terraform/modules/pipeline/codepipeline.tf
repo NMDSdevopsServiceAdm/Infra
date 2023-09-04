@@ -30,6 +30,7 @@ resource "aws_codepipeline" "codepipeline_feature_branch" {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
         FullRepositoryId = "NMDSdevopsServiceAdm/Infra"
         BranchName       = "feat/terraform-pipeline"
+        DetectChanges = "false"
       }
     }
   }
@@ -43,13 +44,24 @@ resource "aws_codepipeline" "codepipeline_feature_branch" {
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["source_output"]
-      output_artifacts = ["build_output"]
+      # output_artifacts = ["build_output"]
       version          = "1"
 
       configuration = {
-        ProjectName = "test"
+        ProjectName = "feature"
       }
       role_arn = aws_iam_role.codebuild_role.arn
+    }
+  }
+}
+
+resource "aws_codebuild_webhook" "codepipeline_feature_branch_webhook" {
+  project_name = "feature"
+  build_type   = "BUILD"
+  filter_group {
+    filter {
+      type    = "EVENT"
+      pattern = "PUSH"
     }
   }
 }
@@ -81,6 +93,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
         FullRepositoryId = "NMDSdevopsServiceAdm/Infra"
         BranchName       = "main"
+        DetectChanges = "false"
       }
     }
   }
@@ -98,13 +111,12 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       version          = "1"
 
       configuration = {
-        ProjectName = "test"
+        ProjectName = "main"
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }
   }
 }
-
 
 # data "aws_kms_alias" "s3kmskey" {
 #   name = "alias/myKmsKey"

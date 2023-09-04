@@ -48,7 +48,7 @@ resource "aws_codepipeline" "codepipeline_feature_branch" {
       version          = "1"
 
       configuration = {
-        ProjectName = "test"
+        ProjectName = "feature"
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }
@@ -56,7 +56,7 @@ resource "aws_codepipeline" "codepipeline_feature_branch" {
 }
 
 resource "aws_codebuild_webhook" "codepipeline_feature_branch_webhook" {
-  project_name = "test"
+  project_name = "feature"
   build_type   = "BUILD"
   filter_group {
     filter {
@@ -111,7 +111,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       version          = "1"
 
       configuration = {
-        ProjectName = "test"
+        ProjectName = "main"
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }

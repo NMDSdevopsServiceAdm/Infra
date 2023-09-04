@@ -41,7 +41,6 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
         FullRepositoryId = "NMDSdevopsServiceAdm/Infra"
         BranchName       = "main"
-        DetectChanges = "false"
       }
     }
   }

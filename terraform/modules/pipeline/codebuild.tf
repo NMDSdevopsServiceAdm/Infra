@@ -26,7 +26,7 @@ resource "aws_codebuild_project" "codebuild_feature" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/Infra.git"
     git_clone_depth = 1
-    buildspec = "buildspec_feature.yml"
+    buildspec = "buildspec/feature.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -62,6 +62,7 @@ resource "aws_codebuild_project" "codebuild_main" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/Infra.git"
     git_clone_depth = 1
+    buildspec = "buildspec/main.yml"
 
     git_submodules_config {
       fetch_submodules = true

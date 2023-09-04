@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+    # Install Terraform
+    - wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+    - sudo apt update && sudo apt install terraform
+  pre_build:
+    commands:
+    # Assume role
+    - export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role --role-arn arn:aws:iam::914197850242:role/CodeBuildServiceRole --role-session-name MySessionName --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" --output text))
+  build:
+    commands:
+    # tf init && tf fmt/plan
+    - cd terraform/environment/non-prod
+    - terraform init
+    - terraform apply -auto-approve
+    

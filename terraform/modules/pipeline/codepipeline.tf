@@ -4,7 +4,7 @@ resource "aws_codestarconnections_connection" "codestar_github" {
 }
 
 resource "aws_codebuild_webhook" "codepipeline_feature_branch_webhook" {
-  project_name = "test"
+  project_name = "feature"
   build_type   = "BUILD"
   filter_group {
     filter {

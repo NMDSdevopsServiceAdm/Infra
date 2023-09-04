@@ -55,6 +55,17 @@ resource "aws_codepipeline" "codepipeline_feature_branch" {
   }
 }
 
+resource "aws_codebuild_webhook" "codepipeline_feature_branch_webhook" {
+  project_name = "test"
+  build_type   = "BUILD"
+  filter_group {
+    filter {
+      type    = "EVENT"
+      pattern = "PUSH"
+    }
+  }
+}
+
 resource "aws_codepipeline" "codepipeline_main_branch" {
   name     = "tf-main-branch-pipeline"
   role_arn = aws_iam_role.codebuild_role.arn
@@ -82,6 +93,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
         FullRepositoryId = "NMDSdevopsServiceAdm/Infra"
         BranchName       = "main"
+        DetectChanges = "false"
       }
     }
   }
@@ -105,7 +117,6 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
     }
   }
 }
-
 
 # data "aws_kms_alias" "s3kmskey" {
 #   name = "alias/myKmsKey"

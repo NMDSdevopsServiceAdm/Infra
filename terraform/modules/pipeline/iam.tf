@@ -55,7 +55,8 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "s3:ListBucket",
       "s3:ListAllMyBuckets",
       "s3:GetBucketPolicy",
-      "s3:PutBucketPolicy"
+      "s3:PutBucketPolicy",
+      "s3:GetBucketCORS"
     ]
     resources = ["*"]
   }

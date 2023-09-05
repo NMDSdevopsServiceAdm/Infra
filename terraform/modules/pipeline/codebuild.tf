@@ -1,6 +1,6 @@
 resource "aws_codebuild_project" "codebuild_feature" {
   name          = "feature"
-  description   = "terraform pipeline feature branch"
+  description   = "terraform validation and dry run plan on the feature branch"
   build_timeout = "5"
   service_role  = aws_iam_role.codebuild_role.arn 
 

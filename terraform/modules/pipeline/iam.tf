@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "s3:GetBucketAcl",
       "s3:GetBucketLocation"
     ]
-    resources = ["arn:aws:s3:::codepipeline-eu-west-1-*"]
+    resources = ["*"]
   }
 
   statement {

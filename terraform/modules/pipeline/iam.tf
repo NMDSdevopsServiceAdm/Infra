@@ -126,7 +126,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
     effect = "Allow"
 
     actions = [
-      "iam:*",
+      "iam:PassRole",
     ]
 
     resources = [aws_iam_role.codebuild_role.arn]

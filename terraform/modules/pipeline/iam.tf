@@ -52,7 +52,10 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "s3:GetBucketAcl",
       "s3:GetBucketLocation",
       "s3:DeleteObject",
-      "s3:ListBucket"
+      "s3:ListBucket",
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketPolicy",
+      "s3:PutBucketPolicy"
     ]
     resources = ["*"]
   }

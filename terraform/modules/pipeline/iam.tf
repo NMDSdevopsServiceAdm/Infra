@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     principals {
       type        = "Service"
-      identifiers = ["codebuild.amazonaws.com","codepipeline.amazonaws.com"]
+      identifiers = ["codebuild.amazonaws.com", "codepipeline.amazonaws.com"]
     }
 
     principals {
@@ -43,10 +43,22 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "codestar-connections:*",
       "codepipeline:*",
       "codecommit:GitPull",
-      "codebuild:*"
     ]
 
     resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "codebuild:CreateReportGroup",
+      "codebuild:CreateReport",
+      "codebuild:UpdateReport",
+      "codebuild:BatchPutTestCases",
+      "codebuild:BatchPutCodeCoverages"
+    ]
+    resources = [aws_codebuild_project.codebuild_feature.arn, aws_codebuild_project.codebuild_main.arn]
   }
 
   statement {

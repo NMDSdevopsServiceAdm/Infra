@@ -1,5 +1,5 @@
 resource "aws_codestarconnections_connection" "codestar_github" {
-                                                                          name          = "GitHub"
+  name          = "GitHub"
   provider_type = "GitHub"
 }
 
@@ -15,17 +15,12 @@ resource "aws_codebuild_webhook" "codepipeline_feature_branch_webhook" {
 }
 
 resource "aws_codepipeline" "codepipeline_main_branch" {
-  name     = "tf-main-branch-pipeline"
+  name     = "terraform-main-branch-pipeline"
   role_arn = aws_iam_role.codebuild_role.arn
 
   artifact_store {
     location = aws_s3_bucket.codepipeline_bucket.bucket
     type     = "S3"
-
-    # encryption_key {
-    #   id   = data.aws_kms_alias.s3kmskey.arn
-    #   type = "KMS"
-    # }
   }
 
   stage {
@@ -64,7 +59,3 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
     }
   }
 }
-
-# data "aws_kms_alias" "s3kmskey" {
-#   name = "alias/myKmsKey"
-# }

@@ -56,7 +56,8 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "codebuild:CreateReport",
       "codebuild:UpdateReport",
       "codebuild:BatchPutTestCases",
-      "codebuild:BatchPutCodeCoverages"
+      "codebuild:BatchPutCodeCoverages",
+      "codebuild:BatchGetProjects"
     ]
     resources = [aws_codebuild_project.codebuild_feature.arn, aws_codebuild_project.codebuild_main.arn]
   }

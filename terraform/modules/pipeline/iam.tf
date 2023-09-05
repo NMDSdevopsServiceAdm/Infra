@@ -127,6 +127,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
 
     actions = [
       "iam:PassRole",
+      "iam:GetRole"
     ]
 
     resources = [aws_iam_role.codebuild_role.arn]

@@ -17,7 +17,7 @@ resource "aws_codebuild_project" "codebuild_feature" {
 
   logs_config {
     cloudwatch_logs {
-      group_name  = "/aws/codebuild/${aws_codebuild_project.codebuild_feature.name}"
+      group_name  = "/aws/codebuild/feature"
     }
   }
 
@@ -52,7 +52,7 @@ resource "aws_codebuild_project" "codebuild_main" {
 
   logs_config {
     cloudwatch_logs {
-      group_name  = "/aws/codebuild/${aws_codebuild_project.codebuild_main.name}"
+      group_name  = "/aws/codebuild/main"
     }
   }
 

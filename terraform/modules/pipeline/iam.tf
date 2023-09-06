@@ -117,7 +117,9 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "codebuild:UpdateReport",
       "codebuild:BatchPutTestCases",
       "codebuild:BatchPutCodeCoverages",
-      "codebuild:BatchGetProjects"
+      "codebuild:BatchGetBuilds",
+      "codebuild:BatchGetProjects",
+      "codebuild:StartBuild"
     ]
     resources = [aws_codebuild_project.codebuild_feature.arn, aws_codebuild_project.codebuild_main.arn]
   }
@@ -133,7 +135,8 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "iam:ListAttachedRolePolicies",
       "iam:ListRoles",
       "iam:ListRolePolicies",
-      "iam:GetRolePolicy"
+      "iam:GetRolePolicy",
+      "iam:PutRolePolicy"
     ]
 
     resources = [aws_iam_role.codebuild_role.arn]

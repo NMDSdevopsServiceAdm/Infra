@@ -121,7 +121,12 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "codebuild:BatchGetProjects",
       "codebuild:StartBuild"
     ]
-    resources = [aws_codebuild_project.codebuild_feature.arn, aws_codebuild_project.codebuild_main.arn, aws_codebuild_project.codebuild_asc_wds_build.arn]
+    resources = [
+      aws_codebuild_project.codebuild_feature.arn, 
+      aws_codebuild_project.codebuild_main.arn, 
+      aws_codebuild_project.codebuild_asc_wds_build.arn,
+      aws_codebuild_project.codebuild_asc_wds_build_test_frontend.arn
+      ]
   }
 
   statement {

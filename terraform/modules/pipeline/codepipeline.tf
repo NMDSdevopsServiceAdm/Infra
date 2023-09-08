@@ -104,5 +104,25 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       role_arn = aws_iam_role.codebuild_role.arn
     }
   }
+
+  stage {
+    name = "Test"
+
+    action {
+      name             = "Test"
+      category         = "Test"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["test_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "asc-wds-build-test-frontend"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+  }
+
 }
 

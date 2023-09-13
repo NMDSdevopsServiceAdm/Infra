@@ -109,16 +109,31 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
     name = "Test"
 
     action {
-      name             = "Test"
+      name             = "test-frontend"
       category         = "Test"
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["source_output"]
-      output_artifacts = ["test_output"]
+      output_artifacts = ["test_frontend_output"]
       version          = "1"
 
       configuration = {
         ProjectName = "asc-wds-build-test-frontend"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+
+    action {
+      name             = "test-backend"
+      category         = "Test"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["test_backend_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "asc-wds-build-test-backend"
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }

@@ -107,7 +107,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
 
   stage {
     name = "Test"
-
+ 
     action {
       name             = "test-frontend"
       category         = "Test"
@@ -149,6 +149,25 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
 
       configuration = {
         ProjectName = "asc-wds-build-test-performance"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    } 
+  }
+
+  stage {
+    name = "Deploy"
+
+    action {
+      name             = "Deploy"
+      category         = "Deploy"
+      owner            = "AWS"
+      provider         = "S3"
+      input_artifacts  = ["build_output"]
+      version          = "1"
+
+      configuration   = {
+        BucketName = aws_s3_bucket.codepipeline_asc_wds_deploy_frontend_bucket.bucket
+        Extract = "true"
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }

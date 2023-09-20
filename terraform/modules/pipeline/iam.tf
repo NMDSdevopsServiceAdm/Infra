@@ -34,6 +34,13 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "ecr:GetAuthorizationToken",
       "ecr:BatchGetImage",
       "ecr:BatchCheckLayerAvailability",
+      "ecr:CompleteLayerUpload",
+      "ecr:DescribeImages",
+      "ecr:DescribeRepositories",
+      "ecr:InitiateLayerUpload",
+      "ecr:ListImages",
+      "ecr:PutImage",
+      "ecr:UploadLayerPart",
       "codestar-connections:*",
       "codepipeline:*",
       "codecommit:GitPull",
@@ -41,7 +48,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
 
     resources = ["*"]
   }
-
+  
   statement {
     effect = "Allow"
 
@@ -127,7 +134,8 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       aws_codebuild_project.codebuild_asc_wds_build.arn,
       aws_codebuild_project.codebuild_asc_wds_build_test_frontend.arn,
       aws_codebuild_project.codebuild_asc_wds_build_test_backend.arn,
-      aws_codebuild_project.codebuild_asc_wds_build_test_performance.arn
+      aws_codebuild_project.codebuild_asc_wds_build_test_performance.arn,
+      aws_codebuild_project.codebuild_asc_wds_build_deploy_backend.arn,
       ]
   }
 

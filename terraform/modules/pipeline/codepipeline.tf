@@ -160,7 +160,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
     name = "Deploy"
     
     action {
-      name             = "Deploy"
+      name             = "deploy-frontend"
       category         = "Deploy"
       owner            = "AWS"
       provider         = "S3"
@@ -171,6 +171,21 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
            BucketName = aws_s3_bucket.sfc_asc_wds_deploy_frontend_bucket.bucket
            Extract = "true"
       }
+    }
+
+    action {
+      name             = "deploy-backend"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["deploy_backend_output"]
+      version          = "1"
+
+       configuration = {
+        ProjectName = "asc-wds-build-deploy-backend"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
     }
   }
 }

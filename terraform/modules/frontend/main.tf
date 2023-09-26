@@ -6,6 +6,10 @@ resource "aws_s3_bucket" "sfc_frontend_bucket" {
   }
 }
 
+output "bucket_name" {
+  value = aws_s3_bucket.sfc_frontend_bucket.bucket
+}
+
 resource "aws_s3_bucket_ownership_controls" "sfc_frontend_bucket_ownership_controls" {
   bucket = aws_s3_bucket.sfc_frontend_bucket.id
   rule {

@@ -7,3 +7,7 @@ resource "aws_s3_bucket" "codepipeline_asc_wds_build_bucket" {
 resource "aws_s3_bucket" "codepipeline_asc_wds_deploy_frontend_bucket" {
   bucket = "sfc-asc-wds-deploy-frontend"
 }
+
+output "bucket_name" {
+  value = aws_s3_bucket.codepipeline_asc_wds_deploy_frontend_bucket.bucket
+}

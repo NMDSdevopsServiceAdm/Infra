@@ -29,8 +29,10 @@ module "frontend" {
 #   source = "../../modules/networking"
 # }
 
-# module "pipeline" {
-#   source = "../../modules/pipeline"
+module "pipeline" {
+  source = "../../modules/pipeline/staging"
 
-#   environment = var.environment
-# }
+  environment = var.environment
+  target_bucket = module.frontend.bucket_name
+  source_bucket = "sfc-asc-wds-deploy-frontend"
+}

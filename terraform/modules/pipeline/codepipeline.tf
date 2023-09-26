@@ -229,7 +229,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       version          = "1"
       role_arn = aws_iam_role.codebuild_role.arn
       configuration = {
-        BucketName = "sfc-frontend-staging"
+        BucketName = var.target_bucket
         Extract = "true"
       }
     }

@@ -156,6 +156,16 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
 
     resources = [aws_iam_role.codebuild_role.arn]
   }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "ssm:GetParameters"
+    ]
+
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_role_policy" "codebuildservicerole_policy" {

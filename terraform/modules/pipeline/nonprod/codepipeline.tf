@@ -167,9 +167,9 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       input_artifacts  = ["build_output"]
       version          = "1"
       role_arn = aws_iam_role.codebuild_role.arn
-      configuration = {
-           BucketName = aws_s3_bucket.sfc_asc_wds_deploy_frontend_bucket.bucket
-           Extract = "true"
+      configuration   = {
+        BucketName = aws_s3_bucket.codepipeline_asc_wds_deploy_frontend_bucket.bucket
+        Extract = "true"
       }
     }
 

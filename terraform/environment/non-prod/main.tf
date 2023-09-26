@@ -30,7 +30,7 @@ terraform {
 # }
 
 module "pipeline" {
-  source = "../../modules/pipeline"
+  source = "../../modules/pipeline/nonprod"
 
   environment = var.environment
 }

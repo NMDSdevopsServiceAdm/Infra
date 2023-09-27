@@ -135,6 +135,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       aws_codebuild_project.codebuild_asc_wds_build_test_frontend.arn,
       aws_codebuild_project.codebuild_asc_wds_build_test_backend.arn,
       aws_codebuild_project.codebuild_asc_wds_build_test_performance.arn,
+      aws_codebuild_project.codebuild_asc_wds_build_deploy_frontend.arn,
       aws_codebuild_project.codebuild_asc_wds_build_deploy_backend.arn,
       ]
   }

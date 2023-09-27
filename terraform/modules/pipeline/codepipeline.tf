@@ -161,16 +161,17 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
     
     action {
       name             = "deploy-frontend"
-      category         = "Deploy"
+      category         = "Build"
       owner            = "AWS"
-      provider         = "S3"
+      provider         = "CodeBuild"
       input_artifacts  = ["build_output"]
+      output_artifacts = ["deploy_frontend_output"]
       version          = "1"
-      role_arn = aws_iam_role.codebuild_role.arn
-      configuration   = {
-        BucketName = var.target_bucket
-        Extract = "true"
+
+       configuration = {
+        ProjectName = "asc-wds-build-deploy-frontend"
       }
+      role_arn = aws_iam_role.codebuild_role.arn
     }
 
     action {
@@ -190,49 +191,4 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
   }
 }
 
-
-/* resource "aws_codepipeline" "codepipeline_asc_wds_deploy" {
-  name     = "asc-wds-deploy-pipeline"
-  role_arn = aws_iam_role.codebuild_role.arn
-
-  artifact_store {
-    location = aws_s3_bucket.codepipeline-staging-bucket.bucket
-    type     = "S3"
-  }
-
-  stage {
-    name = "Source"
-    action {
-      name             = "Source"
-      category         = "Source"
-      owner            = "AWS"
-      provider         = "S3"
-      version          = "1"
-      output_artifacts = ["source_output"]
-      configuration = {
-        S3Bucket    = "sfc-frontend-nonprod"
-        S3ObjectKey = "assets"
-        PollForSourceChanges = false
-      }
-    }
-  }
-
-  stage {
-    name = "Deploy"
-    
-    action {
-      name             = "deploy-frontend"
-      category         = "Deploy"
-      owner            = "AWS"
-      provider         = "S3"
-      input_artifacts  = ["source_output"]
-      version          = "1"
-      role_arn = aws_iam_role.codebuild_role.arn
-      configuration = {
-        BucketName = var.target_bucket
-        Extract = "true"
-      }
-    }
-  }
-} */
 

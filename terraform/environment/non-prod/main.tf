@@ -32,6 +32,6 @@ module "frontend" {
 module "pipeline" {
   source = "../../modules/pipeline"
 
-  environment = var.environment
+  environment   = var.environment
   target_bucket = module.frontend.target_bucket_name
 }

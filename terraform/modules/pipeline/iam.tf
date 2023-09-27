@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::914197850242:role/CodeBuildServiceRole"]
+      identifiers = ["arn:aws:iam::914197850242:role/CodeBuildServiceRole", "arn:aws:iam::101248264786:role/CodeBuildServiceRole"]
     }
 
     actions = ["sts:AssumeRole"]

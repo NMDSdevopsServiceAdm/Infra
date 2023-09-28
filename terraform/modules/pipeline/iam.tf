@@ -39,6 +39,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "ecr:DescribeRepositories",
       "ecr:InitiateLayerUpload",
       "ecr:ListImages",
+      "ecr:ListTagsForResource",
       "ecr:PutImage",
       "ecr:UploadLayerPart",
       "codestar-connections:*",

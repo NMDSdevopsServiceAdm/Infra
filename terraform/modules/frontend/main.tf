@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "sfc_frontend_bucket" {
-  bucket = "sfc-fronend-${var.environment}"
+  bucket = "sfc-frontend-${var.environment}"
 
   tags = {
     Name = "S3 bucket for frontend"
@@ -43,14 +43,14 @@ resource "aws_s3_bucket_website_configuration" "sfc_frontend_bucket_website_conf
 resource "aws_s3_bucket_policy" "sfc_frontend_bucket_policy" {
   bucket = aws_s3_bucket.sfc_frontend_bucket.id
   policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        Sid       = "PublicReadGetObject"
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
-        Resource = [
+        "Sid"      : "PublicReadGetObject",
+        "Effect"    : "Allow",
+        "Principal" : "*",
+        "Action"    : "s3:GetObject",
+        "Resource" : [
           "${aws_s3_bucket.sfc_frontend_bucket.arn}/*",
         ]
       },

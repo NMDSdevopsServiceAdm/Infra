@@ -67,3 +67,220 @@ resource "aws_codebuild_project" "codebuild_main" {
     }
   }
 }
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build" {
+  name          = "asc-wds-build"
+  description   = "build the asc-wds application"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/build"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/build.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_test_frontend" {
+  name          = "asc-wds-build-test-frontend"
+  description   = "test the asc-wds application frontend"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/test-frontend"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/test-frontend.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_test_backend" {
+  name          = "asc-wds-build-test-backend"
+  description   = "test the asc-wds application backend"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/test-backend"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/test-backend.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_test_performance" {
+  name          = "asc-wds-build-test-performance"
+  description   = "test the asc-wds application performance"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/test-performance"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/test-performance.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend" {
+  name          = "asc-wds-build-deploy-frontend"
+  description   = "deploy the asc-wds application frontend"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/deploy-frontend"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/deploy-frontend.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_backend" {
+  name          = "asc-wds-build-deploy-backend"
+  description   = "deploy the asc-wds application backend"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+    privileged_mode             = true
+  }
+
+   cache {
+    type  = "LOCAL"
+    modes = ["LOCAL_DOCKER_LAYER_CACHE"]
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/deploy-backend"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/deploy-backend.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}

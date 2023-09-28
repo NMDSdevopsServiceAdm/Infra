@@ -1,6 +1,6 @@
-resource "aws_codebuild_project" "codebuild_feature" {
-  name          = "feature"
-  description   = "terraform validation and dry run plan on the feature branch"
+resource "aws_codebuild_project" "codebuild_terraform_validate" {
+  name          = "asc-wds-infra-terraform-validation"
+  description   = "terraform fmt and validate on branches"
   build_timeout = "5"
   service_role  = aws_iam_role.codebuild_role.arn 
 
@@ -17,7 +17,7 @@ resource "aws_codebuild_project" "codebuild_feature" {
 
   logs_config {
     cloudwatch_logs {
-      group_name  = "/aws/codebuild/feature"
+      group_name  = "/aws/codebuild/terraform-validation"
     }
   }
 
@@ -25,7 +25,7 @@ resource "aws_codebuild_project" "codebuild_feature" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/Infra.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/feature.yml"
+    buildspec = "buildspec/terraform-validation.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -33,9 +33,9 @@ resource "aws_codebuild_project" "codebuild_feature" {
   }
 }
 
-resource "aws_codebuild_project" "codebuild_main" {
-  name          = "main"
-  description   = "terraform pipeline main branch"
+resource "aws_codebuild_project" "codebuild_terraform_apply" {
+  name          = "asc-wds-infra-terraform-apply"
+  description   = "terraform apply the main branch to AWS"
   build_timeout = "5"
   service_role  = aws_iam_role.codebuild_role.arn
 
@@ -52,7 +52,7 @@ resource "aws_codebuild_project" "codebuild_main" {
 
   logs_config {
     cloudwatch_logs {
-      group_name  = "/aws/codebuild/main"
+      group_name  = "/aws/codebuild/terraform-apply"
     }
   }
 
@@ -60,7 +60,7 @@ resource "aws_codebuild_project" "codebuild_main" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/Infra.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/main.yml"
+    buildspec = "buildspec/terraform-apply.yml"
 
     git_submodules_config {
       fetch_submodules = true

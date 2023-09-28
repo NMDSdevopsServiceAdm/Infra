@@ -33,5 +33,5 @@ module "pipeline" {
   source = "../../modules/pipeline"
 
   environment   = var.environment
-  target_bucket = module.frontend.target_bucket_name
+  target_bucket = "sfc-frontend-${var.environment}"
 }

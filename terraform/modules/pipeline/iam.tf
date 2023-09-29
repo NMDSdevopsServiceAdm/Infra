@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::914197850242:role/CodeBuildServiceRole"]
+      identifiers = ["arn:aws:iam::636146736465:role/CodeBuildServiceRole"]
     }
 
     actions = ["sts:AssumeRole"]
@@ -39,6 +39,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "ecr:DescribeRepositories",
       "ecr:InitiateLayerUpload",
       "ecr:ListImages",
+      "ecr:ListTagsForResource",
       "ecr:PutImage",
       "ecr:UploadLayerPart",
       "codestar-connections:*",
@@ -129,8 +130,8 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "codebuild:StartBuild"
     ]
     resources = [
-      aws_codebuild_project.codebuild_feature.arn, 
-      aws_codebuild_project.codebuild_main.arn, 
+      aws_codebuild_project.codebuild_terraform_validate.arn, 
+      aws_codebuild_project.codebuild_terraform_apply.arn, 
       aws_codebuild_project.codebuild_asc_wds_build.arn,
       aws_codebuild_project.codebuild_asc_wds_build_test_frontend.arn,
       aws_codebuild_project.codebuild_asc_wds_build_test_backend.arn,

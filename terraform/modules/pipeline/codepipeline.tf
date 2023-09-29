@@ -4,7 +4,7 @@ resource "aws_codestarconnections_connection" "codestar_github" {
 }
 
 resource "aws_codebuild_webhook" "codepipeline_feature_branch_webhook" {
-  project_name = "feature"
+  project_name = aws_codebuild_project.codebuild_terraform_validate.name
   build_type   = "BUILD"
   filter_group {
     filter {

@@ -53,7 +53,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       version          = "1"
 
       configuration = {
-        ProjectName = "main"
+        ProjectName = aws_codebuild_project.codebuild_terraform_apply.name
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }

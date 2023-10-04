@@ -106,7 +106,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build" {
 resource "aws_codebuild_project" "codebuild_asc_wds_build_test_frontend" {
   name          = "asc-wds-build-test-frontend"
   description   = "test the asc-wds application frontend"
-  build_timeout = "5"
+  build_timeout = "10"
   service_role  = aws_iam_role.codebuild_role.arn
 
   artifacts {
@@ -141,7 +141,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_frontend" {
 resource "aws_codebuild_project" "codebuild_asc_wds_build_test_backend" {
   name          = "asc-wds-build-test-backend"
   description   = "test the asc-wds application backend"
-  build_timeout = "5"
+  build_timeout = "10"
   service_role  = aws_iam_role.codebuild_role.arn
 
   artifacts {
@@ -177,7 +177,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_backend" {
 resource "aws_codebuild_project" "codebuild_asc_wds_build_test_performance" {
   name          = "asc-wds-build-test-performance"
   description   = "test the asc-wds application performance"
-  build_timeout = "5"
+  build_timeout = "10"
   service_role  = aws_iam_role.codebuild_role.arn
 
   artifacts {
@@ -212,7 +212,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_performance" {
 resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend" {
   name          = "asc-wds-build-deploy-frontend"
   description   = "deploy the asc-wds application frontend"
-  build_timeout = "5"
+  build_timeout = "10"
   service_role  = aws_iam_role.codebuild_role.arn
 
   artifacts {
@@ -247,7 +247,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend" {
 resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_backend" {
   name          = "asc-wds-build-deploy-backend"
   description   = "deploy the asc-wds application backend"
-  build_timeout = "5"
+  build_timeout = "10"
   service_role  = aws_iam_role.codebuild_role.arn
 
   artifacts {

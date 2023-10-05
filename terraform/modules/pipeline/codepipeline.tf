@@ -114,7 +114,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       category         = "Test"
       owner            = "AWS"
       provider         = "CodeBuild"
-      input_artifacts  = ["source_output"]
+      input_artifacts  = ["build_output"]
       output_artifacts = ["test_frontend_output"]
       version          = "1"
 
@@ -129,7 +129,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       category         = "Test"
       owner            = "AWS"
       provider         = "CodeBuild"
-      input_artifacts  = ["source_output"]
+      input_artifacts  = ["build_output"]
       output_artifacts = ["test_backend_output"]
       version          = "1"
 
@@ -144,7 +144,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       category         = "Test"
       owner            = "AWS"
       provider         = "CodeBuild"
-      input_artifacts  = ["source_output"]
+      input_artifacts  = ["build_output"]
       output_artifacts = ["test_performance_output"]
       version          = "1"
 
@@ -179,7 +179,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       category         = "Build"
       owner            = "AWS"
       provider         = "CodeBuild"
-      input_artifacts  = ["source_output"]
+      input_artifacts  = ["build_output"]
       output_artifacts = ["deploy_backend_output"]
       version          = "1"
 

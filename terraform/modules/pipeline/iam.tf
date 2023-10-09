@@ -47,6 +47,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "codestar-connections:*",
       "codepipeline:*",
       "codecommit:GitPull",
+      "sts:AssumeRole"
     ]
 
     resources = ["*"]

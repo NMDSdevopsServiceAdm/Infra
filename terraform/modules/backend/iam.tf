@@ -21,7 +21,7 @@ resource "aws_iam_role_policy_attachment" "app_runner_instance_role_policy_attac
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
 }
 
-resource "aws_iam_role" "app_runner_erc_access_role" {
+resource "aws_iam_role" "app_runner_ecr_access_role" {
   name = "SFCAppRunnerECRAccessRole"
 
   assume_role_policy = jsonencode({
@@ -38,8 +38,8 @@ resource "aws_iam_role" "app_runner_erc_access_role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "app_runner_erc_access_role_policy_attachment" {
-  role       = aws_iam_role.app_runner_erc_access_role.name
+resource "aws_iam_role_policy_attachment" "app_runner_ecr_access_role_policy_attachment" {
+  role       = aws_iam_role.app_runner_ecr_access_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
 }
 

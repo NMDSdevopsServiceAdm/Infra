@@ -20,7 +20,7 @@ resource "aws_apprunner_service" "sfc_app_runner" {
       access_role_arn = aws_iam_role.app_runner_erc_access_role.arn
     }
     image_repository {
-      image_identifier      = "636146736465.dkr.ecr.eu-west-1.amazonaws.com/sfc-backend-build-images:latest"
+      image_identifier      = "636146736465.dkr.ecr.eu-west-1.amazonaws.com/sfc-backend-build-images:${var.environment}"
       image_repository_type = "ECR"
       image_configuration {
         port = 3000

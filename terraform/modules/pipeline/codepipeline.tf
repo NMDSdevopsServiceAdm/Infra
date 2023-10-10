@@ -35,7 +35,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
         FullRepositoryId = "NMDSdevopsServiceAdm/Infra"
-        BranchName       = "main"
+        BranchName       = "feat/stagingEnv"
       }
     }
   }

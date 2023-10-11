@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "codebuild_cross_account_access_service_policy" {
 
 resource "aws_iam_policy" "codebuild_cross_account_access_service_policy" {
   name        = "CodebuildCrossAccountAccessServicePolicy"
-  description = "To provide cross account access for codebuild in build and deploy to perform terraform apply on staging"
+  description = "To provide cross account access for codebuild in build and deploy to perform terraform apply on ${var.environment}"
   policy      = data.aws_iam_policy_document.codebuild_cross_account_access_service_policy.json
 }
 
@@ -40,19 +40,19 @@ data "aws_iam_policy_document" "codebuild_terraform_state_bucket_policy" {
   statement {
     effect    = "Allow"
     actions   = ["s3:ListBucket"]
-    resources = ["arn:aws:s3:::terraform-state-sfc-staging"]
+    resources = ["arn:aws:s3:::terraform-state-sfc-${var.environment}"]
   }
 
   statement {
     effect    = "Allow"
     actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
-    resources = ["arn:aws:s3:::terraform-state-sfc-staging/state/terraform.tfstate"]
+    resources = ["arn:aws:s3:::terraform-state-sfc-${var.environment}/state/terraform.tfstate"]
   }
 }
 
 resource "aws_iam_policy" "codebuild_terraform_state_bucket_policy" {
   name        = "CodebuildTerraformStateBucketPolicy"
-  description = "To provide s3 terraform staging buckek permission to codebuild build and deploy"
+  description = "To provide s3 terraform ${var.environment} bucket permission to codebuild build and deploy"
   policy      = data.aws_iam_policy_document.codebuild_terraform_state_bucket_policy.json
 }
 

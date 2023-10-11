@@ -60,3 +60,19 @@ resource "aws_iam_role_policy_attachment" "attach_codebuild_terraform_state_buck
   role       = aws_iam_role.codebuild_cross_account_access_service_role.name
   policy_arn = aws_iam_policy.codebuild_terraform_state_bucket_policy.arn
 }
+
+resource "aws_iam_role_policy_attachment" "attach_managed_aws_policies" {
+  for_each = toset([
+    "arn:aws:iam::aws:policy/AWSAppRunnerFullAccess",
+    "arn:aws:iam::aws:policy/AmazonVPCFullAccess",
+    "arn:aws:iam::aws:policy/IAMFullAccess",
+    "arn:aws:iam::aws:policy/AmazonSSMFullAccess",
+    "arn:aws:iam::aws:policy/AmazonRDSFullAccess",
+    "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+    "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
+    "arn:aws:iam::aws:policy/AmazonElastiCacheFullAccess"
+  ])
+
+  role       = aws_iam_role.codebuild_cross_account_access_service_role.name
+  policy_arn = each.value
+}

@@ -41,19 +41,37 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
   }
 
   stage {
-    name = "Build"
+    name = "DeployBuildAndDeployInfrastructure"
 
     action {
-      name             = "Build"
+      name             = "DeployBuildAndDeployInfrastructure"
       category         = "Build"
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["source_output"]
-      output_artifacts = ["build_output"]
+      output_artifacts = ["terraform_bnd_output"]
       version          = "1"
 
       configuration = {
-        ProjectName = aws_codebuild_project.codebuild_terraform_apply.name
+        ProjectName = aws_codebuild_project.codebuild_terraform_apply_build_and_deploy.name
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+  }
+  stage {
+    name = "DeployStagingInfrastructure"
+
+    action {
+      name             = "DeployStagingInfrastructure"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["terraform_staging_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = aws_codebuild_project.codebuild_terraform_apply_staging.name
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }

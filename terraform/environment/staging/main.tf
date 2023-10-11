@@ -29,3 +29,8 @@ module "networking" {
   source = "../../modules/networking"
 }
 
+module "cross_account_access" {
+  source = "../../modules/cross_account_access"
+
+  environment = var.environment
+}

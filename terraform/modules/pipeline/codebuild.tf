@@ -33,9 +33,9 @@ resource "aws_codebuild_project" "codebuild_terraform_validate" {
   }
 }
 
-resource "aws_codebuild_project" "codebuild_terraform_apply" {
-  name          = "asc-wds-infra-terraform-apply"
-  description   = "terraform apply the main branch to AWS"
+resource "aws_codebuild_project" "codebuild_terraform_apply_build_and_deploy" {
+  name          = "asc-wds-infra-terraform-apply-build-and-deploy"
+  description   = "terraform apply the main branch to AWS build and deploy account"
   build_timeout = "5"
   service_role  = aws_iam_role.codebuild_role.arn
 
@@ -52,7 +52,7 @@ resource "aws_codebuild_project" "codebuild_terraform_apply" {
 
   logs_config {
     cloudwatch_logs {
-      group_name  = "/aws/codebuild/terraform-apply"
+      group_name  = "/aws/codebuild/terraform-apply/build-and-deploy"
     }
   }
 
@@ -60,7 +60,42 @@ resource "aws_codebuild_project" "codebuild_terraform_apply" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/Infra.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/terraform-apply.yml"
+    buildspec = "buildspec/terraform-apply-build-and-deploy.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_terraform_apply_staging" {
+  name          = "asc-wds-infra-terraform-apply-staging"
+  description   = "terraform apply the main branch to the AWS staging account"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_SMALL"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/terraform-apply/staging"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/Infra.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/terraform-apply-staging.yml"
 
     git_submodules_config {
       fetch_submodules = true

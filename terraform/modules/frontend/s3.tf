@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "sfc_frontend_bucket" {
 resource "aws_s3_bucket_ownership_controls" "sfc_frontend_bucket_ownership_controls" {
   bucket = aws_s3_bucket.sfc_frontend_bucket.id
   rule {
-    object_ownership = "BucketOwnerEnforced"
+    object_ownership = "BucketOwnerPreferred"
   }
 }
 
@@ -64,7 +64,7 @@ resource "aws_s3_bucket_policy" "sfc_frontend_bucket_policy" {
            "AWS": "arn:aws:iam::636146736465:role/CodeBuildServiceRole"
            
          },
-        "Resource" :  "${aws_s3_bucket.sfc_frontend_bucket.arn}"
+        "Resource" : ["${aws_s3_bucket.sfc_frontend_bucket.arn}"]
       },
       {
         "Sid"      : "FrontendAssetDeployPutObject",
@@ -77,7 +77,7 @@ resource "aws_s3_bucket_policy" "sfc_frontend_bucket_policy" {
            "AWS": "arn:aws:iam::636146736465:role/CodeBuildServiceRole"
            
          },
-        "Resource" :  "${aws_s3_bucket.sfc_frontend_bucket.arn}/*"
+        "Resource" :  ["${aws_s3_bucket.sfc_frontend_bucket.arn}/*"]
       },
     ]
   })

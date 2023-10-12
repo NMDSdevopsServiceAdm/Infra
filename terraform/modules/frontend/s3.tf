@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "sfc_frontend_bucket" {
 resource "aws_s3_bucket_ownership_controls" "sfc_frontend_bucket_ownership_controls" {
   bucket = aws_s3_bucket.sfc_frontend_bucket.id
   rule {
-    object_ownership = "BucketOwnerPreferred"
+    object_ownership = "BucketOwnerEnforced"
   }
 }
 
@@ -20,16 +20,6 @@ resource "aws_s3_bucket_public_access_block" "sfc_frontend_public_access_block" 
   block_public_policy     = false
   ignore_public_acls      = false
   restrict_public_buckets = false
-}
-
-resource "aws_s3_bucket_acl" "sfc_frontend_bucket_acl" {
-  depends_on = [
-    aws_s3_bucket_ownership_controls.sfc_frontend_bucket_ownership_controls,
-    aws_s3_bucket_public_access_block.sfc_frontend_public_access_block,
-  ]
-
-  bucket = aws_s3_bucket.sfc_frontend_bucket.id
-  acl    = "public-read"
 }
 
 resource "aws_s3_bucket_website_configuration" "sfc_frontend_bucket_website_configuration" {

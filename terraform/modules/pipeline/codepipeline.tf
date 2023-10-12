@@ -76,6 +76,24 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       role_arn = aws_iam_role.codebuild_role.arn
     }
   }
+   stage {
+    name = "DeployPreProductionInfrastructure"
+
+    action {
+      name             = "DeployPreProductionInfrastructure"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["terraform_pre_production_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = aws_codebuild_project.codebuild_terraform_apply_pre_production.name
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+  }
 }
 
 resource "aws_codepipeline" "codepipeline_asc_wds_build" {

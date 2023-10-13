@@ -36,7 +36,7 @@ resource "aws_codebuild_project" "codebuild_terraform_validate" {
 resource "aws_codebuild_project" "codebuild_terraform_apply_build_and_deploy" {
   name          = "asc-wds-infra-terraform-apply-build-and-deploy"
   description   = "terraform apply the main branch to AWS build and deploy account"
-  build_timeout = "5"
+  build_timeout = "15"
   service_role  = aws_iam_role.codebuild_role.arn
 
   artifacts {
@@ -71,7 +71,7 @@ resource "aws_codebuild_project" "codebuild_terraform_apply_build_and_deploy" {
 resource "aws_codebuild_project" "codebuild_terraform_apply_staging" {
   name          = "asc-wds-infra-terraform-apply-staging"
   description   = "terraform apply the main branch to the AWS staging account"
-  build_timeout = "5"
+  build_timeout = "15"
   service_role  = aws_iam_role.codebuild_role.arn
 
   artifacts {
@@ -106,7 +106,7 @@ resource "aws_codebuild_project" "codebuild_terraform_apply_staging" {
 resource "aws_codebuild_project" "codebuild_terraform_apply_pre_production" {
   name          = "asc-wds-infra-terraform-apply-pre-production"
   description   = "terraform apply the main branch to the AWS pre production account"
-  build_timeout = "5"
+  build_timeout = "15"
   service_role  = aws_iam_role.codebuild_role.arn
 
   artifacts {

@@ -8,7 +8,7 @@ data "aws_iam_policy_document" "cross_account_ecr_access_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["101248264786","114055388985"]
+      identifiers = ["101248264786","114055388985","008366934221"]
     }
 
     actions = [

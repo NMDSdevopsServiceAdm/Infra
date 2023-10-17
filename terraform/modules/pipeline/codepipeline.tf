@@ -76,7 +76,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       role_arn = aws_iam_role.codebuild_role.arn
     }
   }
-   stage {
+  stage {
     name = "DeployPreProductionInfrastructure"
 
     action {
@@ -94,7 +94,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       role_arn = aws_iam_role.codebuild_role.arn
     }
   }
-   stage {
+  stage {
     name = "DeployProductionInfrastructure"
 
     action {
@@ -112,7 +112,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       role_arn = aws_iam_role.codebuild_role.arn
     }
   }
-  
+
   stage {
     name = "DeployBenchmarkInfrastructure"
 
@@ -231,7 +231,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
 
   stage {
     name = "Deploy"
-    
+
     action {
       name             = "deploy-frontend"
       category         = "Build"
@@ -241,7 +241,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       output_artifacts = ["deploy_frontend_output"]
       version          = "1"
 
-       configuration = {
+      configuration = {
         ProjectName = "asc-wds-build-deploy-frontend"
       }
       role_arn = aws_iam_role.codebuild_role.arn
@@ -256,8 +256,145 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       output_artifacts = ["deploy_backend_output"]
       version          = "1"
 
-       configuration = {
+      configuration = {
         ProjectName = "asc-wds-build-deploy-backend"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+  }
+}
+
+
+resource "aws_codepipeline" "codepipeline_asc_wds_deploy" {
+  name     = "asc-wds-deploy-pipeline"
+  role_arn = aws_iam_role.codebuild_role.arn
+
+  artifact_store {
+    location = aws_s3_bucket.codepipeline_asc_wds_deploy_bucket.bucket
+    type     = "S3"
+  }
+
+  stage {
+    name = "Source"
+
+    action {
+      name             = "Source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["source_output"]
+      configuration = {
+        ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
+        FullRepositoryId = "NMDSdevopsServiceAdm/SFC-Migration-Test"
+        BranchName       = "main"
+      }
+    }
+  }
+
+  stage {
+    name = "ApproveStagingDeployment"
+
+    action {
+      name     = "ApproveStagingDeployment"
+      category = "Approval"
+      owner    = "AWS"
+      provider = "Manual"
+      version  = "1"
+    }
+  }
+
+  stage {
+    name = "DeployStaging"
+
+    action {
+      name             = "DeployStaging"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["deploy_staging_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "asc-wds-deploy-staging"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+  }
+
+  stage {
+    name = "ApprovePreProductionDeployment"
+
+    action {
+      name     = "ApprovePreProductionDeployment"
+      category = "Approval"
+      owner    = "AWS"
+      provider = "Manual"
+      version  = "1"
+    }
+  }
+
+  stage {
+    name = "DeployPreProduction"
+
+    action {
+      name             = "DeployPreProduction"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["deploy_pre_production_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "asc-wds-deploy-pre-prod"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+  }
+
+  stage {
+    name = "ApproveProductionDeployment"
+    
+    action {
+      name     = "ApproveProductionDeployment"
+      category = "Approval"
+      owner    = "AWS"
+      provider = "Manual"
+      version  = "1"
+    }
+  }
+
+  stage {
+    name = "DeployProduction"
+
+    action {
+      name             = "DeployProduction"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["deploy_production_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "asc-wds-deploy-prod"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+
+    action {
+      name             = "DeployBenchmark"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["deploy_benchmark_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "asc-wds-deploy-benchmark"
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }

@@ -139,6 +139,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       aws_codebuild_project.codebuild_terraform_apply_staging.arn,
       aws_codebuild_project.codebuild_terraform_apply_pre_production.arn,
       aws_codebuild_project.codebuild_terraform_apply_production.arn,
+      aws_codebuild_project.codebuild_terraform_apply_benchmark.arn,
       aws_codebuild_project.codebuild_asc_wds_build.arn,
       aws_codebuild_project.codebuild_asc_wds_build_test_frontend.arn,
       aws_codebuild_project.codebuild_asc_wds_build_test_backend.arn,

@@ -173,6 +173,40 @@ resource "aws_codebuild_project" "codebuild_terraform_apply_production" {
   }
 }
 
+resource "aws_codebuild_project" "codebuild_terraform_apply_benchmark" {
+  name          = "asc-wds-infra-terraform-apply-benchmark"
+  description   = "terraform apply the main branch to the AWS benchmark account"
+  build_timeout = "15"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_SMALL"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/terraform-apply/benchmark"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/Infra.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/terraform-apply-benchmark.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
 
 resource "aws_codebuild_project" "codebuild_asc_wds_build" {
   name          = "asc-wds-build"

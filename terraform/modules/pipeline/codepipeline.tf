@@ -35,7 +35,7 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
         FullRepositoryId = "NMDSdevopsServiceAdm/Infra"
-        BranchName       = "main"
+        BranchName       = "feat/benchmarkEnv"
       }
     }
   }
@@ -108,6 +108,25 @@ resource "aws_codepipeline" "codepipeline_main_branch" {
 
       configuration = {
         ProjectName = aws_codebuild_project.codebuild_terraform_apply_production.name
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+  }
+  
+  stage {
+    name = "DeployBenchmarkInfrastructure"
+
+    action {
+      name             = "DeployBenchmarkInfrastructure"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["source_output"]
+      output_artifacts = ["terraform_benchmark_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = aws_codebuild_project.codebuild_terraform_apply_benchmark.name
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }

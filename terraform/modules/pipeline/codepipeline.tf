@@ -276,6 +276,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_deploy" {
 
   stage {
     name = "Source"
+
     action {
       name             = "Source"
       category         = "Source"
@@ -293,6 +294,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_deploy" {
 
   stage {
     name = "ApproveStagingDeployment"
+
     action {
       name     = "ApproveStagingDeployment"
       category = "Approval"
@@ -323,6 +325,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_deploy" {
 
   stage {
     name = "ApprovePreProductionDeployment"
+
     action {
       name     = "ApprovePreProductionDeployment"
       category = "Approval"
@@ -353,6 +356,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_deploy" {
 
   stage {
     name = "ApproveProductionDeployment"
+    
     action {
       name     = "ApproveProductionDeployment"
       category = "Approval"

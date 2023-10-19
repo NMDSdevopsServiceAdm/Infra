@@ -23,7 +23,7 @@ resource "aws_cloudfront_distribution" "sfc_frontend_distribution" {
       query_string = false
 
       cookies {
-        forward = "none"
+        forward = "all"
       }
     }
 

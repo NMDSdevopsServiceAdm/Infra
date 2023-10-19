@@ -12,6 +12,7 @@ resource "aws_cloudfront_distribution" "sfc_frontend_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
+  comment             = "Couldfront distribution for ${var.environment}"
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]

@@ -70,7 +70,8 @@ resource "aws_iam_role_policy_attachment" "attach_managed_aws_policies" {
     "arn:aws:iam::aws:policy/AmazonRDSFullAccess",
     "arn:aws:iam::aws:policy/AmazonS3FullAccess",
     "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
-    "arn:aws:iam::aws:policy/AmazonElastiCacheFullAccess"
+    "arn:aws:iam::aws:policy/AmazonElastiCacheFullAccess",
+    "arn:aws:iam::aws:policy/CloudFrontFullAccess"
   ])
 
   role       = aws_iam_role.codebuild_cross_account_access_service_role.name

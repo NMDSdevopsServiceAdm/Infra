@@ -25,6 +25,7 @@ module "backend" {
   security_group_ids = module.networking.security_group_id
    rds_instance_class =  var.rds_instance_class
   rds_allocated_storage = var.rds_allocated_storage
+  multi_az = var.multi_az
 }
 
 module "networking" {

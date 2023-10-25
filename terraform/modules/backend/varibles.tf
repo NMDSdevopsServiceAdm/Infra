@@ -30,3 +30,8 @@ variable "rds_allocated_storage" {
   description = "The amount of storage assigned to AWS RDS"
   type        = number
 }
+
+variable "multi_az" {
+  description = "Specifies if the RDS instance is multi-AZ"
+  type = bool
+}

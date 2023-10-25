@@ -9,6 +9,7 @@ resource "aws_db_instance" "sfc_rds_db" {
   password            = random_password.sfc_rds_password.result
   skip_final_snapshot = true
   db_subnet_group_name = aws_db_subnet_group.sfc_rds_db_subnet_group.name
+  multi_az             = var.multi_az
 }
 
 resource "aws_db_subnet_group" "sfc_rds_db_subnet_group" {

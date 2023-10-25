@@ -12,3 +12,13 @@ variable "app_runner_memory" {
   description = "The memory size you wish to use on AWS App Runner"
   type        = number
 }
+
+variable "rds_instance_class" {
+  description = "The instance class for AWS RDS"
+  type        = string
+}
+
+variable "rds_allocated_storage" {
+  description = "The amount of storage assigned to AWS RDS"
+  type        = number
+}

@@ -23,6 +23,8 @@ module "backend" {
   app_runner_memory  = var.app_runner_memory
   private_subnet_ids = module.networking.private_subnets
   security_group_ids = module.networking.security_group_id
+   rds_instance_class =  var.rds_instance_class
+  rds_allocated_storage = var.rds_allocated_storage
 }
 
 module "networking" {

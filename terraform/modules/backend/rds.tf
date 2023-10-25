@@ -1,7 +1,7 @@
 resource "aws_db_instance" "sfc_rds_db" {
   identifier          = "sfc-db-${var.environment}"
-  instance_class      = "db.t3.micro"
-  allocated_storage   = 20
+  instance_class      = var.rds_instance_class
+  allocated_storage   = var.rds_allocated_storage
   engine              = "postgres"
   engine_version      = "14.7"
   db_name             = "sfcdb_${random_string.sfc_rds_db_name_id.result}"

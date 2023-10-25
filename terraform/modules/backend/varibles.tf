@@ -20,3 +20,13 @@ variable "private_subnet_ids" {
 variable "security_group_ids" {
   description = "The ID's of the security groups used by the App Runner VPC connector"
 }
+
+variable "rds_instance_class" {
+  description = "The instance class for AWS RDS"
+  type        = string
+}
+
+variable "rds_allocated_storage" {
+  description = "The amount of storage assigned to AWS RDS"
+  type        = number
+}

@@ -1,6 +1,6 @@
 environment       = "preprod"
-app_runner_cpu    = 256
-app_runner_memory = 512
+app_runner_cpu    = "0.25 vCPU"
+app_runner_memory = "0.5 GB"
 rds_instance_class = "db.t3.medium"
 rds_allocated_storage = 100
 multi_az = false

@@ -5,12 +5,12 @@ variable "environment" {
 
 variable "app_runner_cpu" {
   description = "The CPU size you wish to use on AWS App Runner"
-  type        = number
+  type        = string
 }
 
 variable "app_runner_memory" {
   description = "The memory size you wish to use on AWS App Runner"
-  type        = number
+  type        = string
 }
 
 variable "rds_instance_class" {

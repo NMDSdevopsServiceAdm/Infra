@@ -48,5 +48,6 @@ resource "aws_apprunner_auto_scaling_configuration_version" "sfc_app_runner_auto
   auto_scaling_configuration_name = "sfc-app-runner-auto-scaling-config"
 
   min_size = var.app_runner_min_container_instances_size
+  max_size = var.app_runner_max_container_instances_size 
   max_concurrency = var.app_runner_max_concurrency
 }

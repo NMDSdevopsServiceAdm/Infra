@@ -6,4 +6,5 @@ rds_allocated_storage = 100
 multi_az = false
 elasticache_node_type = "cache.t3.micro"
 app_runner_min_container_instances_size = 1
+app_runner_max_container_instances_size = 1
 app_runner_max_concurrency = 200

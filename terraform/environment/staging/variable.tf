@@ -37,6 +37,10 @@ variable "app_runner_min_container_instances_size" {
   description = "The minimum number of container instance for AWS App runner"
   type = number
 }
+variable "app_runner_max_container_instances_size" {
+  description = "The maximum number of container instance for AWS App runner"
+  type = number
+}
 
 variable "app_runner_max_concurrency" {
   description = "The maximum number of concurrency for a single AWS App runner container instance"

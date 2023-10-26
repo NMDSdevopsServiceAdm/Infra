@@ -5,3 +5,5 @@ rds_instance_class = "db.t3.2xlarge"
 rds_allocated_storage = 200
 multi_az = true
 elasticache_node_type = "cache.t3.micro"
+app_runner_min_container_instances_size = 2
+app_runner_max_concurrency = 200

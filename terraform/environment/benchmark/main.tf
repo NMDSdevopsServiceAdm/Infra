@@ -27,6 +27,8 @@ module "backend" {
   rds_allocated_storage = var.rds_allocated_storage
   multi_az = var.multi_az
   elasticache_node_type = var.elasticache_node_type
+  app_runner_min_container_instances_size = var.app_runner_min_container_instances_size
+  app_runner_max_concurrency = var.app_runner_max_concurrency
 }
 
 module "networking" {

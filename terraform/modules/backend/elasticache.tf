@@ -6,7 +6,7 @@ resource "aws_elasticache_subnet_group" "sfc_redis_elasticache_subnet_group" {
 resource "aws_elasticache_replication_group" "sfc_redis_replication_group" {
   replication_group_id        = "sfc-redis"
   description                 = "sfc-redis"
-  node_type                   = "cache.t4g.micro"
+  node_type                   = var.elasticache_node_type
   num_cache_clusters          = 1
   parameter_group_name        = "default.redis7"
   port                        = 6379

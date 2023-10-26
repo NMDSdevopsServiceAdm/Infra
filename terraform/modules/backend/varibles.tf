@@ -35,3 +35,8 @@ variable "multi_az" {
   description = "Specifies if the RDS instance is multi-AZ"
   type = bool
 }
+
+variable "elasticache_node_type" {
+  description = "The node type for AWS elasticache"
+  type = string
+}

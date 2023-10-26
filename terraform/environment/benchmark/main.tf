@@ -26,6 +26,7 @@ module "backend" {
    rds_instance_class =  var.rds_instance_class
   rds_allocated_storage = var.rds_allocated_storage
   multi_az = var.multi_az
+  elasticache_node_type = var.elasticache_node_type
 }
 
 module "networking" {

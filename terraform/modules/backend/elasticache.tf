@@ -11,6 +11,7 @@ resource "aws_elasticache_replication_group" "sfc_redis_replication_group" {
   parameter_group_name        = "default.redis7"
   port                        = 6379
   subnet_group_name  = aws_elasticache_subnet_group.sfc_redis_elasticache_subnet_group.name
+  security_group_ids = var.security_group_ids
 
   lifecycle {
     ignore_changes = [num_cache_clusters]

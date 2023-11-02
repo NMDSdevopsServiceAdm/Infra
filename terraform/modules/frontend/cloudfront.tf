@@ -33,6 +33,12 @@ resource "aws_cloudfront_distribution" "sfc_frontend_distribution" {
     max_ttl                = 86400
   }
 
+  custom_error_response {
+    error_caching_min_ttl = 10
+    error_code = 404
+    response_code = 404
+    response_page_path = "/index.html"
+  }
 
   restrictions {
     geo_restriction {

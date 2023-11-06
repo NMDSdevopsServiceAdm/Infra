@@ -12,3 +12,7 @@ variable "app_runner_memory" {
   description = "The memory size you wish to use on AWS App Runner"
   type        = number
 }
+
+variable "rds_db_backup_retention_period" {
+  description = "The amount of days to retain the database backup"
+}

@@ -23,6 +23,7 @@ module "backend" {
   app_runner_memory  = var.app_runner_memory
   private_subnet_ids = module.networking.private_subnets
   security_group_ids = module.networking.security_group_id
+  rds_db_backup_retention_period = var.rds_db_backup_retention_period
 }
 
 module "networking" {

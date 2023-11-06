@@ -20,3 +20,8 @@ variable "private_subnet_ids" {
 variable "security_group_ids" {
   description = "The ID's of the security groups used by the App Runner VPC connector"
 }
+
+
+variable "rds_db_backup_retention_period" {
+  description = "The amount of days to retain the database backup"
+}

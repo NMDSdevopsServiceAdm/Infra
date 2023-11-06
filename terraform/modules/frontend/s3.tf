@@ -28,6 +28,9 @@ resource "aws_s3_bucket_website_configuration" "sfc_frontend_bucket_website_conf
   index_document {
     suffix = "index.html"
   }
+  error_document {
+    key = "index.html"
+  }
 }
 
 resource "aws_s3_bucket_policy" "sfc_frontend_bucket_policy" {

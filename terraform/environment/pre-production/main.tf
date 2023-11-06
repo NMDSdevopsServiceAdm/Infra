@@ -30,6 +30,7 @@ module "backend" {
   app_runner_min_container_instances_size = var.app_runner_min_container_instances_size
   app_runner_max_container_instances_size = var.app_runner_max_container_instances_size
   app_runner_max_concurrency = var.app_runner_max_concurrency
+  rds_db_backup_retention_period = var.rds_db_backup_retention_period
 }
 
 module "networking" {

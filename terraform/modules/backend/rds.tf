@@ -10,6 +10,8 @@ resource "aws_db_instance" "sfc_rds_db" {
   skip_final_snapshot = true
   db_subnet_group_name = aws_db_subnet_group.sfc_rds_db_subnet_group.name
   multi_az             = var.multi_az
+  vpc_security_group_ids = var.security_group_ids
+  backup_retention_period = var.rds_db_backup_retention_period
 }
 
 resource "aws_db_subnet_group" "sfc_rds_db_subnet_group" {

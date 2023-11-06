@@ -46,3 +46,6 @@ variable "app_runner_max_concurrency" {
   description = "The maximum number of concurrency for a single AWS App runner container instance"
   type = number
 }
+variable "rds_db_backup_retention_period" {
+  description = "The amount of days to retain the database backup"
+}

@@ -1,7 +1,7 @@
 resource "aws_apprunner_service" "sfc_app_runner" {
   service_name = "sfc-app-runner-${var.environment}"
 
-
+  auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.sfc_app_runner_auto_scaling_config.arn   
 
   instance_configuration {
     cpu               = var.app_runner_cpu
@@ -42,4 +42,12 @@ resource "aws_apprunner_vpc_connector" "sfc_app_runner_vpc_connector" {
   vpc_connector_name = "sfc-app-runner-vpc-connector"
   subnets            = var.private_subnet_ids
   security_groups    = var.security_group_ids
+}
+
+resource "aws_apprunner_auto_scaling_configuration_version" "sfc_app_runner_auto_scaling_config" {                            
+  auto_scaling_configuration_name = "sfc-app-runner-auto-scaling-config"
+
+  min_size = var.app_runner_min_container_instances_size
+  max_size = var.app_runner_max_container_instances_size 
+  max_concurrency = var.app_runner_max_concurrency
 }

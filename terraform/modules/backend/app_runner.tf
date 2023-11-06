@@ -45,7 +45,7 @@ resource "aws_apprunner_vpc_connector" "sfc_app_runner_vpc_connector" {
 }
 
 resource "aws_apprunner_auto_scaling_configuration_version" "sfc_app_runner_auto_scaling_config" {                            
-  auto_scaling_configuration_name = "sfc-app-runner-auto-scaling-config"
+  auto_scaling_configuration_name = "sfc-app-runner-auto-scaling"
 
   min_size = var.app_runner_min_container_instances_size
   max_size = var.app_runner_max_container_instances_size 

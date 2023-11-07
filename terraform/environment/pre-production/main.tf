@@ -23,6 +23,14 @@ module "backend" {
   app_runner_memory  = var.app_runner_memory
   private_subnet_ids = module.networking.private_subnets
   security_group_ids = module.networking.security_group_id
+  rds_instance_class =  var.rds_instance_class
+  rds_allocated_storage = var.rds_allocated_storage
+  multi_az = var.multi_az
+  elasticache_node_type = var.elasticache_node_type
+  app_runner_min_container_instances_size = var.app_runner_min_container_instances_size
+  app_runner_max_container_instances_size = var.app_runner_max_container_instances_size
+  app_runner_max_concurrency = var.app_runner_max_concurrency
+  rds_db_backup_retention_period = var.rds_db_backup_retention_period
 }
 
 module "networking" {

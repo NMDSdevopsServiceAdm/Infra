@@ -1,7 +1,7 @@
 resource "aws_db_instance" "sfc_rds_db" {
   identifier          = "sfc-db-${var.environment}"
-  instance_class      = "db.t3.micro"
-  allocated_storage   = 20
+  instance_class      = var.rds_instance_class
+  allocated_storage   = var.rds_allocated_storage
   engine              = "postgres"
   engine_version      = "14.7"
   db_name             = "sfcdb_${random_string.sfc_rds_db_name_id.result}"
@@ -9,8 +9,10 @@ resource "aws_db_instance" "sfc_rds_db" {
   password            = random_password.sfc_rds_password.result
   skip_final_snapshot = true
   db_subnet_group_name = aws_db_subnet_group.sfc_rds_db_subnet_group.name
+  multi_az             = var.multi_az
   vpc_security_group_ids = var.security_group_ids
-  backup_retention_period = 35
+  backup_retention_period = var.rds_db_backup_retention_period
+  apply_immediately = true
 }
 
 resource "aws_db_subnet_group" "sfc_rds_db_subnet_group" {

@@ -42,3 +42,7 @@ module "cross_account_access" {
 
   environment = var.environment
 }
+
+module "reserved_instance" {
+  source = "../../modules/reserved_instance"
+}

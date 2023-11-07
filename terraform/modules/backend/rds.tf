@@ -12,6 +12,7 @@ resource "aws_db_instance" "sfc_rds_db" {
   multi_az             = var.multi_az
   vpc_security_group_ids = var.security_group_ids
   backup_retention_period = var.rds_db_backup_retention_period
+  apply_immediately = true
 }
 
 resource "aws_db_subnet_group" "sfc_rds_db_subnet_group" {

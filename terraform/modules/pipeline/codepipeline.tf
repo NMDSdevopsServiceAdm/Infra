@@ -270,7 +270,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["build_output"]
-      output_artifacts = ["deploy_frontend_output"]
+      output_artifacts = ["deploy_frontend_staging_output"]
       version          = "1"
 
       configuration = {

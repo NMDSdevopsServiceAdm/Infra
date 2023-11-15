@@ -349,6 +349,75 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_performance" {
   }
 }
 
+resource "aws_codebuild_project" "codebuild_asc_wds_build_frontend_preprod" {
+  name          = "asc-wds-build-frontend-preprod"
+  description   = "build the asc-wds application frontend for the preprod environment"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/build-frontend-preprod"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/build-frontend-preprod.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_frontend_prod" {
+  name          = "asc-wds-build-frontend-prod"
+  description   = "build the asc-wds application frontend for the prod environment"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/build-frontend-prod"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/build-frontend-prod.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
 resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend" {
   name          = "asc-wds-build-deploy-frontend"
   description   = "deploy the asc-wds application frontend"

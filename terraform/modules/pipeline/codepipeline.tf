@@ -228,7 +228,39 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
     }
   }
 
+  stage {
+    name = "BuildFrontend"
 
+    action {
+        name             = "build-frontend-preprod"
+        category         = "Build"
+        owner            = "AWS"
+        provider         = "CodeBuild"
+        input_artifacts  = ["source_output"]
+        output_artifacts = ["build_output_preprod"]
+        version          = "1"
+
+        configuration = {
+          ProjectName = "asc-wds-build-frontend-preprod"
+        }
+        role_arn = aws_iam_role.codebuild_role.arn
+      }
+
+      action {
+        name             = "build-frontend-prod"
+        category         = "Build"
+        owner            = "AWS"
+        provider         = "CodeBuild"
+        input_artifacts  = ["source_output"]
+        output_artifacts = ["build_output_prod"]
+        version          = "1"
+
+        configuration = {
+          ProjectName = "asc-wds-build-frontend-prod"
+        }
+        role_arn = aws_iam_role.codebuild_role.arn
+      }
+  }
   stage {
     name = "Deploy"
 

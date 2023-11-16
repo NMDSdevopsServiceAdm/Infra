@@ -42,3 +42,7 @@ module "cross_account_access" {
 
   environment = var.environment
 }
+
+module "sfc_reports_jobs" {
+  source = "../../modules/sfc_reports_jobs"
+}

@@ -9,7 +9,13 @@ resource "aws_lambda_function" "lambda_analysis_file_job" {
   environment {
     variables = {
       DATABASE_URL = aws_ssm_parameter.lambda_database_url.value
+      PGSSLMODE    = aws_ssm_parameter.lambda_pgsslmode.value
     }
+  }
+
+  vpc_config {
+    subnet_ids         = var.private_subnet_ids
+    security_group_ids = var.security_group_ids
   }
 }   
 resource "aws_cloudwatch_log_group" "lambda_analysis_file_logs" {

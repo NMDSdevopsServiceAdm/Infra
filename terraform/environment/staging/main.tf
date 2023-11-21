@@ -51,4 +51,6 @@ module "sfc_reports_jobs" {
   database_host = module.backend.database_host
   database_port = module.backend.database_port
   database_name = module.backend.database_name
+  private_subnet_ids = module.networking.private_subnets
+  security_group_ids = module.networking.security_group_id
 }

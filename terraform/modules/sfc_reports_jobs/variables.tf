@@ -27,3 +27,11 @@ variable "database_name" {
   description = "Name of the RDS database"
   type        = string
 }
+
+variable "private_subnet_ids" {
+  description = "The ID's of the private subnet used by the App Runner VPC connector"
+}
+
+variable "security_group_ids" {
+  description = "The ID's of the security groups used by the App Runner VPC connector"
+}

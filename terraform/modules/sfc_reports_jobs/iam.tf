@@ -30,6 +30,20 @@ data "aws_iam_policy_document" "lambda_analysis_file_logging_policy" {
   }
 }
 
+data "aws_iam_policy_document" "lambda_analysis_file_execution_policy" {
+ statement {
+    effect = "Allow"
+
+    actions = [
+      "ec2:CreateNetworkInterface",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:DeleteNetworkInterface"
+    ]
+
+    resources = ["*"]
+  }
+}
+ 
 resource "aws_iam_policy" "lambda_analysis_file_logging_policy" {
   name        = "analysis_file_lambda_logging"
   path        = "/"
@@ -37,7 +51,18 @@ resource "aws_iam_policy" "lambda_analysis_file_logging_policy" {
   policy      = data.aws_iam_policy_document.lambda_analysis_file_logging_policy.json
 }
 
+resource "aws_iam_policy" "lambda_analysis_file_execution_policy" {
+  name        = "analysis_file_lambda_execution"
+  description = "IAM policy for executing the lambda"
+  policy      = data.aws_iam_policy_document.lambda_analysis_file_execution_policy.json
+}
+
 resource "aws_iam_role_policy_attachment" "lambda_analysis_file_logging_policy_attachment" {
   role       = aws_iam_role.lambda_role.id
   policy_arn = aws_iam_policy.lambda_analysis_file_logging_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_analysis_file_execution_policy_attachment" {
+  role       = aws_iam_role.lambda_role.id
+  policy_arn = aws_iam_policy.lambda_analysis_file_execution_policy.arn
 }

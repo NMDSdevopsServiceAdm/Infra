@@ -1,6 +1,11 @@
 resource "aws_ecr_repository" "sfc_backend_ecr_repository" {
   name = "sfc-backend-build-images"
 }
+
+resource "aws_ecr_repository" "sfc_generate_analysis_files_ecr_repository" {
+  name = "generate-analysis-files"
+}
+
 data "aws_iam_policy_document" "cross_account_ecr_access_policy" {
   statement {
     sid    = "cross account ecr access policy"
@@ -25,5 +30,10 @@ data "aws_iam_policy_document" "cross_account_ecr_access_policy" {
 
 resource "aws_ecr_repository_policy" "cross_account_ecr_access_policy" {
   repository = aws_ecr_repository.sfc_backend_ecr_repository.name
+  policy     = data.aws_iam_policy_document.cross_account_ecr_access_policy.json
+}
+
+resource "aws_ecr_repository_policy" "cross_account_generate_analysis_files_ecr_access_policy" {
+  repository = aws_ecr_repository.sfc_generate_analysis_files_ecr_repository.name
   policy     = data.aws_iam_policy_document.cross_account_ecr_access_policy.json
 }

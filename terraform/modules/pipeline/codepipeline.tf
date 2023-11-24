@@ -228,21 +228,83 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
     }
   }
 
+  stage {
+    name = "BuildFrontend"
 
+    action {
+        name             = "build-frontend-preprod"
+        category         = "Build"
+        owner            = "AWS"
+        provider         = "CodeBuild"
+        input_artifacts  = ["source_output"]
+        output_artifacts = ["build_output_preprod"]
+        version          = "1"
+
+        configuration = {
+          ProjectName = "asc-wds-build-frontend-preprod"
+        }
+        role_arn = aws_iam_role.codebuild_role.arn
+      }
+
+      action {
+        name             = "build-frontend-prod"
+        category         = "Build"
+        owner            = "AWS"
+        provider         = "CodeBuild"
+        input_artifacts  = ["source_output"]
+        output_artifacts = ["build_output_prod"]
+        version          = "1"
+
+        configuration = {
+          ProjectName = "asc-wds-build-frontend-prod"
+        }
+        role_arn = aws_iam_role.codebuild_role.arn
+      }
+  }
   stage {
     name = "Deploy"
 
     action {
-      name             = "deploy-frontend"
+      name             = "deploy-frontend-staging"
       category         = "Build"
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["build_output"]
-      output_artifacts = ["deploy_frontend_output"]
+      output_artifacts = ["deploy_frontend_staging_output"]
       version          = "1"
 
       configuration = {
-        ProjectName = "asc-wds-build-deploy-frontend"
+        ProjectName = "asc-wds-build-deploy-frontend-staging"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+
+    action {
+      name             = "deploy-frontend-preprod"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["build_output_preprod"]
+      output_artifacts = ["deploy_frontend_preprod_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "asc-wds-build-deploy-frontend-preprod"
+      }
+      role_arn = aws_iam_role.codebuild_role.arn
+    }
+
+    action {
+      name             = "deploy-frontend-prod"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["build_output_prod"]
+      output_artifacts = ["deploy_frontend_prod_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "asc-wds-build-deploy-frontend-prod"
       }
       role_arn = aws_iam_role.codebuild_role.arn
     }

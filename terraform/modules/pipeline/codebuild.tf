@@ -235,7 +235,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/build.yml"
+    buildspec = "buildspec/build/build.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -270,7 +270,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_frontend" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/test-frontend.yml"
+    buildspec = "buildspec/build/test-frontend.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -305,7 +305,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_backend" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/test-backend.yml"
+    buildspec = "buildspec/build/test-backend.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -341,7 +341,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_performance" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/test-performance.yml"
+    buildspec = "buildspec/build/test-performance.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -349,9 +349,78 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_performance" {
   }
 }
 
-resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend" {
-  name          = "asc-wds-build-deploy-frontend"
-  description   = "deploy the asc-wds application frontend"
+resource "aws_codebuild_project" "codebuild_asc_wds_build_frontend_preprod" {
+  name          = "asc-wds-build-frontend-preprod"
+  description   = "build the asc-wds application frontend for the preprod environment"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/build-frontend-preprod"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/build/build-frontend-preprod.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_frontend_prod" {
+  name          = "asc-wds-build-frontend-prod"
+  description   = "build the asc-wds application frontend for the prod environment"
+  build_timeout = "5"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/build-frontend-prod"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/build/build-frontend-prod.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend_staging" {
+  name          = "asc-wds-build-deploy-frontend-staging"
+  description   = "deploy the asc-wds application frontend in staging"
   build_timeout = "10"
   service_role  = aws_iam_role.codebuild_role.arn
 
@@ -368,7 +437,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend" {
 
   logs_config {
     cloudwatch_logs {
-      group_name  = "/aws/codebuild/asc-wds-build/deploy-frontend"
+      group_name  = "/aws/codebuild/asc-wds-build/deploy-frontend-staging"
     }
   }
 
@@ -376,7 +445,77 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/deploy-frontend.yml"
+    buildspec = "buildspec/build/deploy-frontend-staging.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend_preprod" {
+  name          = "asc-wds-build-deploy-frontend-preprod"
+  description   = "deploy the asc-wds application frontend in preprod"
+  build_timeout = "10"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/deploy-frontend-preprod"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/build/deploy-frontend-preprod.yml"
+
+    git_submodules_config {
+      fetch_submodules = true
+    }
+  }
+}
+
+resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend_prod" {
+  name          = "asc-wds-build-deploy-frontend-prod"
+  description   = "deploy the asc-wds application frontend in prod"
+  build_timeout = "10"
+  service_role  = aws_iam_role.codebuild_role.arn
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_MEDIUM"
+    image                       = "aws/codebuild/standard:7.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/asc-wds-build/deploy-frontend-prod"
+    }
+  }
+
+  source {
+    type            = "GITHUB"
+    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    git_clone_depth = 1
+    buildspec = "buildspec/build/deploy-frontend-prod.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -417,7 +556,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_backend" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/deploy-backend.yml"
+    buildspec = "buildspec/build/deploy-backend.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -452,7 +591,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_deploy_staging" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/deploy-staging.yml"
+    buildspec = "buildspec/deploy/deploy-staging.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -487,7 +626,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_deploy_pre_prod" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/deploy-preprod.yml"
+    buildspec = "buildspec/deploy/deploy-preprod.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -522,7 +661,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_deploy_prod" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/deploy-prod.yml"
+    buildspec = "buildspec/deploy/deploy-prod.yml"
 
     git_submodules_config {
       fetch_submodules = true
@@ -557,7 +696,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_deploy_benchmark" {
     type            = "GITHUB"
     location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
     git_clone_depth = 1
-    buildspec = "buildspec/deploy-benchmark.yml"
+    buildspec = "buildspec/deploy/deploy-benchmark.yml"
 
     git_submodules_config {
       fetch_submodules = true

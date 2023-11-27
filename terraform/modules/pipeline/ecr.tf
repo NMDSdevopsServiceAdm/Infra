@@ -26,6 +26,30 @@ data "aws_iam_policy_document" "cross_account_ecr_access_policy" {
       "ecr:CompleteLayerUpload"
     ]
   }
+
+  statement {
+    sid    = "lambda ECR image cross account retrieval policy"
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+
+    actions = [
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+    ]
+
+     condition {
+      test     = "StringLike"
+      variable = "aws:sourceARN"
+
+      values = [
+        "arn:aws:lambda:eu-west-1:101248264786:function:*",
+      ]
+    }
+  }
 }
 
 resource "aws_ecr_repository_policy" "cross_account_ecr_access_policy" {

@@ -1,15 +1,19 @@
 resource "aws_lambda_function" "lambda_analysis_file_job" {
-  filename      =  "${path.module}/empty.zip"
+  image_uri     = "636146736465.dkr.ecr.eu-west-1.amazonaws.com/generate-analysis-files:latest"
   function_name = "lambda_analysis_file"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "index.handler"
-  runtime       = "nodejs18.x"
+  architectures = ["x86_64"]
   timeout       = 900
+  memory_size   = 256
+  package_type  = "Image"
 
   environment {
     variables = {
-      DATABASE_URL = aws_ssm_parameter.lambda_database_url.value
-      PGSSLMODE    = aws_ssm_parameter.lambda_pgsslmode.value
+      DATABASE_URL  = aws_ssm_parameter.lambda_database_url.value
+      REPORTS_ACCESS_KEY = aws_ssm_parameter.lambda_reports_access_key.value
+      REPORTS_SECRET_KEY = aws_ssm_parameter.lambda_reports_secret_key.value
+      NODE_ENV      = aws_ssm_parameter.lambda_node_env.value
+      REPORTS_S3_BUCKET =  aws_ssm_parameter.lambda_reports_s3_bucket.value
     }
   }
 

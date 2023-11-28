@@ -21,7 +21,28 @@ resource "aws_lambda_function" "lambda_analysis_file_job" {
     subnet_ids         = var.private_subnet_ids
     security_group_ids = var.security_group_ids
   }
-}   
+} 
+
+resource "aws_cloudwatch_event_rule" "lambda_analysis_file_eventbridge" {
+    name = "lambda_analysis_file_eventbridge"
+    description = "Fires four times every month"
+    schedule_expression = "cron(0 0 1,8,15,23 * ? *)"
+}
+
+resource "aws_cloudwatch_event_target" "lambda_analysis_file_job_every_month_four_times" {
+    rule = aws_cloudwatch_event_rule.lambda_analysis_file_eventbridge.name
+    target_id = "lambda_analysis_file_job"
+    arn = aws_lambda_function.lambda_analysis_file_job.arn
+}
+
+resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda_analysis_file_job" {
+    statement_id = "AllowExecutionFromCloudWatch"
+    action = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.lambda_analysis_file_job.function_name
+    principal = "events.amazonaws.com"
+    source_arn = aws_cloudwatch_event_rule.lambda_analysis_file_eventbridge.arn
+}
+
 resource "aws_cloudwatch_log_group" "lambda_analysis_file_logs" {
   name              = "/aws/lambda/${aws_lambda_function.lambda_analysis_file_job.function_name}"
   retention_in_days = 14

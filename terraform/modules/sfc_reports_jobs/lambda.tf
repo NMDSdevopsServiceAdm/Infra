@@ -14,6 +14,9 @@ resource "aws_lambda_function" "lambda_analysis_file_job" {
       REPORTS_SECRET_KEY = aws_ssm_parameter.lambda_reports_secret_key.value
       NODE_ENV      = aws_ssm_parameter.lambda_node_env.value
       REPORTS_S3_BUCKET =  aws_ssm_parameter.lambda_reports_s3_bucket.value
+      DATA_ENGINEERING_ACCESS_KEY = aws_ssm_parameter.lambda_reports_data_engineering_access_key.value
+      DATA_ENGINEERING_SECRET_KEY = aws_ssm_parameter.lambda_reports_data_engineering_secret_key.value
+      DATA_ENGINEERING_S3_BUCKET =  aws_ssm_parameter.lambda_reports_data_engineering_s3_bucket.value
     }
   }
 

@@ -47,6 +47,9 @@ data "aws_iam_policy_document" "cross_account_ecr_access_policy" {
 
       values = [
         "arn:aws:lambda:eu-west-1:101248264786:function:*",
+        "arn:aws:lambda:eu-west-1:114055388985:function:*",
+        "arn:aws:lambda:eu-west-1:008366934221:function:*",
+        "arn:aws:lambda:eu-west-1:702856547275:function:*",
       ]
     }
   }

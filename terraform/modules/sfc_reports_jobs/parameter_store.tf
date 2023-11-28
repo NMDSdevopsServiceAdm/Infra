@@ -26,9 +26,30 @@ resource "aws_ssm_parameter" "lambda_reports_access_key" {
   value       = "change_me"
 }
 
+resource "aws_ssm_parameter" "lambda_reports_data_engineering_access_key" {
+  name        = "/${var.environment}/lambda/reports_data_engineering_access_key"
+  description = "The data enginnering access key for the lambda sfc analysis file jobs"
+  type        = "String"
+  value       = "change_me"
+}
+
+resource "aws_ssm_parameter" "lambda_reports_data_engineering_secret_key" {
+  name        = "/${var.environment}/lambda/reports_secret_key"
+  description = "The data enginnering secret key for the lambda sfc analysis file jobs"
+  type        = "String"
+  value       = "change_me"
+}
+
 resource "aws_ssm_parameter" "lambda_reports_s3_bucket" {
   name        = "/${var.environment}/lambda/reports_s3_bucket"
   description = "The s3 bucket for the lambda sfc analysis file jobs"
   type        = "String"
   value       = "test-sfc-gen-analysis-file"
+}
+
+resource "aws_ssm_parameter" "lambda_reports_data_engineering_s3_bucket" {
+  name        = "/${var.environment}/lambda/reports_s3_bucket"
+  description = "The data engineering s3 bucket for the lambda sfc analysis file jobs"
+  type        = "String"
+  value       = "test-data-engineering-sfc-analysis-file"
 }

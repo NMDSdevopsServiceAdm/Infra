@@ -44,6 +44,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "ecr:PutImage",
       "ecr:UploadLayerPart",
       "ecr:GetRepositoryPolicy",
+      "ecr:SetRepositoryPolicy",
       "codestar-connections:*",
       "codepipeline:*",
       "codecommit:GitPull",

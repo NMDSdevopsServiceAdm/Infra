@@ -9,3 +9,4 @@ app_runner_min_container_instances_size = 1
 app_runner_max_container_instances_size = 1
 app_runner_max_concurrency              = 200
 rds_db_backup_retention_period          = 7
+domain_name = "staging.ascwds.co.uk"

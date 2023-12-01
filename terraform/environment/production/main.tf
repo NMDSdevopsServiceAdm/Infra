@@ -13,6 +13,7 @@ module "frontend" {
   source = "../../modules/frontend"
 
   environment = var.environment
+  domain_name = var.domain_name
 }
 
 module "backend" {

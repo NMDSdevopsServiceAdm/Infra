@@ -9,3 +9,4 @@ app_runner_min_container_instances_size = 2
 app_runner_max_container_instances_size = 25
 app_runner_max_concurrency = 200
 rds_db_backup_retention_period = 35
+domain_name = "asc-wds.skillsforcare.org.uk"

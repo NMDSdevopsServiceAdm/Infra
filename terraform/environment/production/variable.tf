@@ -50,3 +50,8 @@ variable "app_runner_max_concurrency" {
 variable "rds_db_backup_retention_period" {
   description = "The amount of days to retain the database backup"
 }
+
+variable "domain_name" {
+  description = "Domain name of environment"
+  type        = string
+}

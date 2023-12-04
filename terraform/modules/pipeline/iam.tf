@@ -48,6 +48,8 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "codestar-connections:*",
       "codepipeline:*",
       "codecommit:GitPull",
+      "route53domains:*",
+      "route53:*",
       "sts:AssumeRole"
     ]
 

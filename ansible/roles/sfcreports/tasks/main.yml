@@ -1,0 +1,13 @@
+- name: Install Applications
+  ansible.builtin.apt:
+    pkg: 
+      - nodejs
+      - npm
+    update_cache: yes
+    state: present
+
+- name: Git checkout
+  ansible.builtin.git:
+    repo: 'https://github.com/NMDSdevopsServiceAdm/SFC-AnalysisFiles.git'
+    dest: /home/ubuntu/SFC-AnalysisFiles
+

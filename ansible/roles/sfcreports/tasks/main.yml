@@ -1,4 +1,4 @@
-- name: Install Applications
+- name: Install Node
   ansible.builtin.apt:
     pkg: 
       - nodejs
@@ -10,4 +10,8 @@
   ansible.builtin.git:
     repo: 'https://github.com/NMDSdevopsServiceAdm/SFC-AnalysisFiles.git'
     dest: /home/ubuntu/SFC-AnalysisFiles
+
+- name: Install SFC-AnalysisFiles node dependencies
+  community.general.npm:
+    path: /home/ubuntu/SFC-AnalysisFiles
 

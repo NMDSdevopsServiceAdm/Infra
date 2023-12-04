@@ -16,3 +16,8 @@ module "pipeline" {
   environment   = var.environment
   target_bucket = "sfc-frontend-${var.environment}"
 }
+
+module "nonprod_domain" {
+  source = "../../modules/nonprod_domain"
+
+}

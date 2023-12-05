@@ -29,8 +29,13 @@
       export CRON_BENCHMARKS={{ CRON_BENCHMARKS }}
       export CRON_CQC_CHANGES={{ CRON_CQC_CHANGES }}
 
-- name: Run the scheduler
-  ansible.builtin.command:
-    become_user: ubuntu
-    chdir: /home/ubuntu/SFC-AnalysisFiles
-    cmd: node src/index.js
+- name: Add systemd daemon for SFC-AnalysisFiles scheduler
+  ansible.builtin.copy:
+    src:  sfc-analysisfiles.service
+    dest: /etc/systemd/system/sfc-analysisfiles.service
+
+- name: Ensure systemd service is enabled and started
+  ansible.builtin.systemd_service:
+    name: sfc-analysisfiles.service
+    enabled: true
+    state: started

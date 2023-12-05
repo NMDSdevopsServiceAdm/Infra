@@ -1,0 +1,11 @@
+[Unit]
+Description=SFC-AnalysisFiles Scheduler
+After=multi-user.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/SFC-AnalysisFiles
+ExecStart=/usr/bin/node /home/ubuntu/SFC-AnalysisFiles/src/index.js
+
+[Install]
+WantedBy=multi-user.target

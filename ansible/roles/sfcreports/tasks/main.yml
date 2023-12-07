@@ -21,17 +21,18 @@
 
 - name: Create env file and add variables
   ansible.builtin.blockinfile:
-    path: /home/ubuntu/.bashrc
+    path: /home/ubuntu/.env
     create: yes
     block: |
-      export DATABASE_URL={{ DATABASE_URL }}
-      export AWS_ACCESS_KEY_ID={{ AWS_ACCESS_KEY_ID }}
-      export AWS_SECRET_ACCESS_KEY={{ AWS_SECRET_ACCESS_KEY }}
-      export CRON={{ CRON }}
-      export NODE_ENV={{ NODE_ENV }}
-      export CRON_BENCHMARKS={{ CRON_BENCHMARKS }}
-      export CRON_CQC_CHANGES={{ CRON_CQC_CHANGES }}
-      export BENCHMARKS_S3_BUCKET={{ BENCHMARKS_S3_BUCKET }}
+      DATABASE_URL={{ DATABASE_URL }}
+      AWS_ACCESS_KEY_ID={{ AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY={{ AWS_SECRET_ACCESS_KEY }}
+      CRON={{ CRON }}
+      NODE_ENV={{ NODE_ENV }}
+      CRON_BENCHMARKS={{ CRON_BENCHMARKS }}
+      CRON_CQC_CHANGES={{ CRON_CQC_CHANGES }}
+      BENCHMARKS_S3_BUCKET={{ BENCHMARKS_S3_BUCKET }}
+      REPORTS_S3_BUCKET = {{ REPORTS_S3_BUCKET }}
 
 - name: Add systemd daemon for SFC-AnalysisFiles scheduler
   ansible.builtin.copy:
@@ -41,13 +42,5 @@
 - name: Ensure systemd service is present 
   ansible.builtin.systemd_service:
     name: sfc-analysisfiles.service
-    enabled: false
-    state: stopped
-
-# - name: Setup crontab for generate analysis file job
-#   ansible.builtin.cron:
-#     name: "Run generate analysis file job"
-#     minute: "58"
-#     hour: "15"
-#     job: "node --max-old-space-size=8192 jobs/generate_analysis_files.js"
-#   become_user: ubuntu
+    enabled: true
+    state: started

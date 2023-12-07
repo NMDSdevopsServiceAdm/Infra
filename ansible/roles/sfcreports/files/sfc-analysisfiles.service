@@ -6,6 +6,7 @@ After=multi-user.target
 User=ubuntu
 WorkingDirectory=/home/ubuntu/SFC-AnalysisFiles
 ExecStart=/usr/bin/npm run start
+EnvironmentFile=/home/ubuntu/.env
 
 [Install]
 WantedBy=multi-user.target

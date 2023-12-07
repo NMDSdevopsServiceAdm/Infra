@@ -3,6 +3,7 @@
     pkg: 
       - nodejs
       - npm
+      - zip
     update_cache: yes
     state: present
 
@@ -10,6 +11,8 @@
   ansible.builtin.git:
     repo: 'https://github.com/NMDSdevopsServiceAdm/SFC-AnalysisFiles.git'
     dest: /home/ubuntu/SFC-AnalysisFiles
+    update: false
+  become_user: ubuntu
 
 - name: Install SFC-AnalysisFiles node dependencies
   community.general.npm:
@@ -37,5 +40,13 @@
 - name: Ensure systemd service is enabled and started
   ansible.builtin.systemd_service:
     name: sfc-analysisfiles.service
-    enabled: true
-    state: started
+    enabled: false
+    state: stopped
+
+# - name: Setup crontab for generate analysis file job
+#   ansible.builtin.cron:
+#     name: "Run generate analysis file job"
+#     minute: "58"
+#     hour: "15"
+#     job: "node --max-old-space-size=8192 jobs/generate_analysis_files.js"
+#   become_user: ubuntu

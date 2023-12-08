@@ -32,7 +32,6 @@
       CRON_BENCHMARKS={{ CRON_BENCHMARKS }}
       CRON_CQC_CHANGES={{ CRON_CQC_CHANGES }}
       BENCHMARKS_S3_BUCKET={{ BENCHMARKS_S3_BUCKET }}
-      REPORTS_S3_BUCKET = {{ REPORTS_S3_BUCKET }}
 
 - name: Add systemd daemon for SFC-AnalysisFiles scheduler
   ansible.builtin.copy:
@@ -40,7 +39,7 @@
     dest: /etc/systemd/system/sfc-analysisfiles.service
 
 - name: Ensure systemd service is present 
-  ansible.builtin.systemd_service:
+  ansible.builtin.systemd:
     name: sfc-analysisfiles.service
     enabled: true
     state: started

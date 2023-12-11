@@ -56,4 +56,5 @@ module "sfc_reports_jobs" {
   private_subnet_ids = module.networking.private_subnets
   security_group_ids = module.networking.security_group_id
   vpc_id             = module.networking.vpc_id
+  sfc_reports_instance_type = var.sfc_reports_instance_type
 }

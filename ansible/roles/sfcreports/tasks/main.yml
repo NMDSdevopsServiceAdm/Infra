@@ -5,6 +5,7 @@
       - npm
       - zip
       - tmux
+      - awscli
     update_cache: yes
     state: present
 
@@ -35,11 +36,12 @@
 
 - name: Add systemd daemon for SFC-AnalysisFiles scheduler
   ansible.builtin.copy:
-    src:  sfc-analysisfiles.service
-    dest: /etc/systemd/system/sfc-analysisfiles.service
+    src:  sfcreports.service
+    dest: /etc/systemd/system/sfcreports.service
 
 - name: Ensure systemd service is present 
   ansible.builtin.systemd:
-    name: sfc-analysisfiles.service
+    name: sfcreports.service
+    daemon_reload: true
     enabled: true
     state: started

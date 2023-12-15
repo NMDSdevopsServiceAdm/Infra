@@ -1,0 +1,4 @@
+- hosts: sfcreports
+  become: true
+  roles:
+    - role: sfcreports

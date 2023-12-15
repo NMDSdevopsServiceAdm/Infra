@@ -54,3 +54,7 @@ variable "domain_name" {
   description = "Domain name of environment"
   type        = string
 }
+
+variable "sfc_reports_instance_type" {
+  description = "The instance type for the sfc reports EC2 instance"
+}

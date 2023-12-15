@@ -183,7 +183,7 @@ data "aws_iam_policy_document" "codebuild_grouped_aws_managed_policy" {
     resources = ["*"]
   }
 
-    statement {
+  statement {
     sid    = "AWSCertificateManagerFullAccess"
     effect = "Allow"
     actions = [

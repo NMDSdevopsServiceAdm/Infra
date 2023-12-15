@@ -183,6 +183,15 @@ data "aws_iam_policy_document" "codebuild_grouped_aws_managed_policy" {
     resources = ["*"]
   }
 
+    statement {
+    sid    = "AWSCertificateManagerFullAccess"
+    effect = "Allow"
+    actions = [
+      "acm:*"
+    ]
+    resources = ["*"]
+  }
+
   statement {
     sid    = "LambdaFullAccess"
     effect = "Allow"

@@ -48,11 +48,6 @@ module "cross_account_access" {
 module "sfc_reports_jobs" {
   source = "../../modules/sfc_reports_jobs"
   environment = var.environment
-  database_password = module.backend.database_password
-  database_username = module.backend.database_username
-  database_host = module.backend.database_host
-  database_port = module.backend.database_port
-  database_name = module.backend.database_name
   public_subnet_ids  = module.networking.public_subnets
   private_subnet_ids = module.networking.private_subnets
   security_group_ids = module.networking.security_group_id

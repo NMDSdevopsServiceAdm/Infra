@@ -193,23 +193,6 @@ data "aws_iam_policy_document" "codebuild_grouped_aws_managed_policy" {
   }
 
   statement {
-    sid    = "LambdaFullAccess"
-    effect = "Allow"
-    actions = [
-      "cloudformation:DescribeStacks",
-      "cloudformation:ListStackResources",
-      "kms:ListAliases",
-      "lambda:*",
-      "states:DescribeStateMachine",
-      "states:ListStateMachines",
-      "tag:GetResources",
-      "xray:GetTraceSummaries",
-      "xray:BatchGetTraces"
-    ]
-    resources = ["*"]
-  }
-
-  statement {
     sid    = "EventBridgeFullAccess"
     effect = "Allow"
     actions = [

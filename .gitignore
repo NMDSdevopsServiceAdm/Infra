@@ -13,3 +13,4 @@ terraform.rc
 .terraform.lock.hcl
 
 .vscode
+inventory

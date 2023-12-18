@@ -153,7 +153,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_build" {
       output_artifacts = ["source_output"]
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
-        FullRepositoryId = "NMDSdevopsServiceAdm/SFC-Migration-Test"
+        FullRepositoryId = "NMDSdevopsServiceAdm/SopraSteria-SFC"
         BranchName       = "main"
       }
     }
@@ -348,7 +348,7 @@ resource "aws_codepipeline" "codepipeline_asc_wds_deploy" {
       output_artifacts = ["source_output"]
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.codestar_github.arn
-        FullRepositoryId = "NMDSdevopsServiceAdm/SFC-Migration-Test"
+        FullRepositoryId = "NMDSdevopsServiceAdm/SopraSteria-SFC"
         BranchName       = "main"
       }
     }

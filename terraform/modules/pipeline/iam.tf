@@ -130,6 +130,7 @@ data "aws_iam_policy_document" "codebuildservicerole_policy" {
       "codebuild:CreateReportGroup",
       "codebuild:CreateReport",
       "codebuild:UpdateReport",
+      "codebuild:UpdateProject",
       "codebuild:BatchPutTestCases",
       "codebuild:BatchPutCodeCoverages",
       "codebuild:BatchGetBuilds",

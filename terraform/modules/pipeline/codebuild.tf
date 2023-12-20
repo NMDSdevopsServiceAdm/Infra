@@ -233,7 +233,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/build.yml"
 
@@ -268,7 +268,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_frontend" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/test-frontend.yml"
 
@@ -303,7 +303,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_backend" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/test-backend.yml"
 
@@ -339,7 +339,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_test_performance" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/test-performance.yml"
 
@@ -374,7 +374,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_frontend_preprod" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/build-frontend-preprod.yml"
 
@@ -409,7 +409,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_frontend_prod" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/build-frontend-prod.yml"
 
@@ -443,7 +443,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend_stagin
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/deploy-frontend-staging.yml"
 
@@ -478,7 +478,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend_prepro
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/deploy-frontend-preprod.yml"
 
@@ -513,7 +513,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_frontend_prod" 
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/deploy-frontend-prod.yml"
 
@@ -554,7 +554,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_build_deploy_backend" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/build/deploy-backend.yml"
 
@@ -589,7 +589,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_deploy_staging" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/deploy/deploy-staging.yml"
 
@@ -624,7 +624,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_deploy_pre_prod" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/deploy/deploy-preprod.yml"
 
@@ -659,7 +659,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_deploy_prod" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/deploy/deploy-prod.yml"
 
@@ -694,7 +694,7 @@ resource "aws_codebuild_project" "codebuild_asc_wds_deploy_benchmark" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/NMDSdevopsServiceAdm/SFC-Migration-Test.git" 
+    location        = "https://github.com/NMDSdevopsServiceAdm/SopraSteria-SFC.git" 
     git_clone_depth = 1
     buildspec = "buildspec/deploy/deploy-benchmark.yml"
 

@@ -11,3 +11,4 @@ app_runner_max_concurrency              = 200
 rds_db_backup_retention_period          = 7
 domain_name = "staging.ascwds.co.uk"
 sfc_reports_instance_type = "t2.micro"
+node_env = "localhost"

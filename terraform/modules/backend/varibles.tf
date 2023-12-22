@@ -13,6 +13,11 @@ variable "app_runner_memory" {
   type        = string
 }
 
+variable "node_env" {
+  description = "The Node Environment Varible to use the correct config"
+  type        = string
+}
+
 variable "private_subnet_ids" {
   description = "The ID's of the private subnet used by the App Runner VPC connector"
 }

@@ -45,3 +45,16 @@ resource "aws_ssm_parameter" "node_env" {
   type        = "String"
   value       = var.node_env
 }
+
+resource "aws_ssm_parameter" "honeycomb_write_key" {
+  name        = "/${var.environment}/app_runner/honeycomb_write_key"
+  description = "The honeycomb write key"
+  type        = "SecureString"
+  value       = "changeme"
+
+  lifecycle {
+    ignore_changes = [
+      value,
+    ]
+  }
+}

@@ -45,6 +45,28 @@ resource "aws_cloudfront_distribution" "sfc_frontend_distribution" {
     max_ttl                = 86400
   }
 
+    ordered_cache_behavior {
+    path_pattern     = "api/*"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id = var.app_runner_url
+
+    forwarded_values {
+      query_string = true
+      headers      = ["Authorization"]
+
+      cookies {
+        forward = "all"
+      }
+    }
+
+    min_ttl                = 0
+    default_ttl            = 86400
+    max_ttl                = 31536000
+    compress               = true
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
   custom_error_response {
     error_caching_min_ttl = 10
     error_code = 404

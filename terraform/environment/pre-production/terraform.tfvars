@@ -8,6 +8,7 @@ elasticache_node_type = "cache.t3.micro"
 app_runner_min_container_instances_size = 1
 app_runner_max_container_instances_size = 1
 app_runner_max_concurrency = 200
+app_runner_url = "ztykfnse35.eu-west-1.awsapprunner.com"
 rds_db_backup_retention_period = 7
 domain_name = "preprod.ascwds.co.uk"
 sfc_reports_instance_type = "t3.large"

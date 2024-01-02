@@ -7,3 +7,8 @@ variable "domain_name" {
   description = "Domain name of environment"
   type        = string
 }
+
+variable "app_runner_url" {
+  description = "App Runner url"
+  type        = string
+}

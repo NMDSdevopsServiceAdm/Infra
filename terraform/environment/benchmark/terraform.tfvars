@@ -1,6 +1,6 @@
 environment       = "benchmark"
-app_runner_cpu    = "0.25 vCPU"
-app_runner_memory = "0.5 GB"
+app_runner_cpu    = "0.5 vCPU"
+app_runner_memory = "1 GB"
 rds_instance_class = "db.t3.small"
 rds_allocated_storage = 20
 multi_az = false

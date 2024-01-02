@@ -38,3 +38,23 @@ resource "aws_ssm_parameter" "redis_endpoint" {
   type        = "String"
   value       = "redis://${aws_elasticache_replication_group.sfc_redis_replication_group.primary_endpoint_address}:6379"
 }
+
+resource "aws_ssm_parameter" "node_env" {
+  name        = "/${var.environment}/app_runner/node_env"
+  description = "The Node Environment Varible to use the correct config"
+  type        = "String"
+  value       = var.node_env
+}
+
+resource "aws_ssm_parameter" "honeycomb_write_key" {
+  name        = "/${var.environment}/app_runner/honeycomb_write_key"
+  description = "The honeycomb write key"
+  type        = "SecureString"
+  value       = "changeme"
+
+  lifecycle {
+    ignore_changes = [
+      value,
+    ]
+  }
+}

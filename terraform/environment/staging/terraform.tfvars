@@ -12,3 +12,4 @@ app_runner_url = "a3akknuhui.eu-west-1.awsapprunner.com"
 rds_db_backup_retention_period          = 7
 domain_name = "staging.ascwds.co.uk"
 sfc_reports_instance_type = "t2.micro"
+node_env = "test"

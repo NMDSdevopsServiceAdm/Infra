@@ -31,6 +31,8 @@ resource "aws_apprunner_service" "sfc_app_runner" {
           DB_NAME        = aws_ssm_parameter.database_name.arn
           DB_HOST        = aws_ssm_parameter.database_host.arn
           REDIS_ENDPOINT = aws_ssm_parameter.redis_endpoint.arn
+          NODE_ENV       = aws_ssm_parameter.node_env.arn
+          HONEYCOMB_WRITE_KEY = aws_ssm_parameter.honeycomb_write_key.arn
         }
       }
     }

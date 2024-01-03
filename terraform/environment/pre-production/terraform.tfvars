@@ -12,3 +12,4 @@ app_runner_url = "ztykfnse35.eu-west-1.awsapprunner.com"
 rds_db_backup_retention_period = 7
 domain_name = "preprod.ascwds.co.uk"
 sfc_reports_instance_type = "t3.large"
+node_env = "preproduction"

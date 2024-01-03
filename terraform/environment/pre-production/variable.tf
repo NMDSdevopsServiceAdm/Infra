@@ -63,3 +63,7 @@ variable "domain_name" {
 variable "sfc_reports_instance_type" {
   description = "The instance type for the sfc reports EC2 instance"
 }
+variable "node_env" {
+  description = "The Node Environment Varible to use the correct config"
+  type        = string
+}

@@ -11,3 +11,4 @@ app_runner_max_concurrency = 200
 rds_db_backup_retention_period = 35
 domain_name = "asc-wds.skillsforcare.org.uk"
 sfc_reports_instance_type = "t3.large"
+node_env = "production"

@@ -3,7 +3,7 @@ resource "aws_db_instance" "sfc_rds_db" {
   instance_class      = var.rds_instance_class
   allocated_storage   = var.rds_allocated_storage
   engine              = "postgres"
-  engine_version      = "14.7"
+  engine_version      = "13.10"
   db_name             = "sfcdb_${random_string.sfc_rds_db_name_id.result}"
   username            = random_string.sfc_rds_db_username.result
   password            = random_password.sfc_rds_password.result

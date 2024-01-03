@@ -33,6 +33,8 @@ resource "aws_apprunner_service" "sfc_app_runner" {
           REDIS_ENDPOINT = aws_ssm_parameter.redis_endpoint.arn
           NODE_ENV       = aws_ssm_parameter.node_env.arn
           HONEYCOMB_WRITE_KEY = aws_ssm_parameter.honeycomb_write_key.arn
+          TOKEN_ISS = aws_ssm_parameter.token_iss.arn
+          TOKEN_SECRET = aws_ssm_parameter.token_secret.arn
         }
       }
     }

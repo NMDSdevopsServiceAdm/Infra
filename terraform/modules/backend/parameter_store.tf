@@ -58,3 +58,29 @@ resource "aws_ssm_parameter" "honeycomb_write_key" {
     ]
   }
 }
+
+resource "aws_ssm_parameter" "token_iss" {
+  name        = "/${var.environment}/app_runner/token_iss"
+  description = "The JWT issuer"
+  type        = "String"
+  value       = "changeme"
+
+  lifecycle {
+    ignore_changes = [
+      value,
+    ]
+  }
+}
+
+resource "aws_ssm_parameter" "token_secret" {
+  name        = "/${var.environment}/app_runner/token_secret"
+  description = "The JWT signing secret"
+  type        = "SecureString"
+  value       = "changeme"
+
+  lifecycle {
+    ignore_changes = [
+      value,
+    ]
+  }
+}

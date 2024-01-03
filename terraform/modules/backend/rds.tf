@@ -13,6 +13,7 @@ resource "aws_db_instance" "sfc_rds_db" {
   vpc_security_group_ids = var.security_group_ids
   backup_retention_period = var.rds_db_backup_retention_period
   apply_immediately = true
+  storage_encrypted = true
 }
 
 resource "aws_db_subnet_group" "sfc_rds_db_subnet_group" {

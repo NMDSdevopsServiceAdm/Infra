@@ -63,3 +63,8 @@ variable "node_env" {
   description = "The Node Environment Varible to use the correct config"
   type        = string
 }
+
+variable "app_runner_url" {
+  description = "The app runner url"
+  type        = string
+}

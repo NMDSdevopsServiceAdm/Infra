@@ -14,6 +14,7 @@ module "frontend" {
 
   environment = var.environment
   domain_name = var.domain_name
+  app_runner_url = va
 }
 
 module "backend" {

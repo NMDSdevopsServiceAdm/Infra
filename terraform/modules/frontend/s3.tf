@@ -33,6 +33,16 @@ resource "aws_s3_bucket_website_configuration" "sfc_frontend_bucket_website_conf
   }
 }
 
+
+resource "aws_s3_bucket_website_configuration" "sfc_public_bucket_website_configuration" {
+  bucket ="sfc-public-${var.environment}"
+
+  index_document {
+    suffix = "index.html"
+  }
+
+}
+
 resource "aws_s3_bucket_policy" "sfc_frontend_bucket_policy" {
   bucket = aws_s3_bucket.sfc_frontend_bucket.id
   policy = jsonencode({

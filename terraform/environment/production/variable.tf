@@ -42,7 +42,10 @@ variable "app_runner_max_container_instances_size" {
   description = "The maximum number of container instance for AWS App runner"
   type = number
 }
-
+variable "app_runner_url" {
+  description = "The app runner url"
+  type        = string
+}
 variable "app_runner_max_concurrency" {
   description = "The maximum number of concurrency for a single AWS App runner container instance"
   type = number
@@ -58,4 +61,9 @@ variable "domain_name" {
 
 variable "sfc_reports_instance_type" {
   description = "The instance type for the sfc reports EC2 instance"
+}
+
+variable "node_env" {
+  description = "The Node Environment Varible to use the correct config"
+  type        = string
 }

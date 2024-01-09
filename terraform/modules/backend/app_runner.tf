@@ -31,6 +31,23 @@ resource "aws_apprunner_service" "sfc_app_runner" {
           DB_NAME        = aws_ssm_parameter.database_name.arn
           DB_HOST        = aws_ssm_parameter.database_host.arn
           REDIS_ENDPOINT = aws_ssm_parameter.redis_endpoint.arn
+          NODE_ENV       = aws_ssm_parameter.node_env.arn
+          HONEYCOMB_WRITE_KEY = aws_ssm_parameter.honeycomb_write_key.arn
+          TOKEN_ISS = aws_ssm_parameter.token_iss.arn
+          TOKEN_SECRET = aws_ssm_parameter.token_secret.arn
+          SLACK_URL = aws_ssm_parameter.slack_url.arn
+          NOTIFY_KEY = aws_ssm_parameter.notify_key.arn
+          ADMIN_URL = aws_ssm_parameter.admin_url.arn
+          GET_ADDRESS = aws_ssm_parameter.get_address.arn
+          SEND_IN_BLUE_KEY = aws_ssm_parameter.send_in_blue_key.arn
+          SEND_IN_BLUE_WHITELIST = aws_ssm_parameter.send_in_blue_whitelist.arn
+          # ENCRYPTION_PRIVATE_KEY = aws_ssm_parameter.encryption_private_key.arn
+          # ENCRYPTION_PUBLIC_KEY = aws_ssm_parameter.encryption_public_key.arn
+          ENCRYPTION_PASSPHRASE = aws_ssm_parameter.encryption_passphrase.arn
+          ENCRYPTION_REVOKECERT = aws_ssm_parameter.encryption_revokecert.arn
+          SEND_EMAILS_SQS_QUEUE = aws_ssm_parameter.send_emails_sqs_queue.arn
+          AWS_ACCESS_KEY_ID = aws_ssm_parameter.aws_access_key_id.arn
+          AWS_SECRET_ACCESS_KEY = aws_ssm_parameter.aws_secret_access_key.arn
         }
       }
     }

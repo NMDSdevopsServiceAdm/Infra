@@ -1,6 +1,6 @@
 environment                             = "staging"
-app_runner_cpu                          = "0.25 vCPU"
-app_runner_memory                       = "0.5 GB"
+app_runner_cpu                          = "4 vCPU"
+app_runner_memory                       = "8 GB"
 rds_instance_class                      = "db.t3.small"
 rds_allocated_storage                   = 20
 multi_az                                = false
@@ -8,6 +8,8 @@ elasticache_node_type                   = "cache.t3.micro"
 app_runner_min_container_instances_size = 1
 app_runner_max_container_instances_size = 1
 app_runner_max_concurrency              = 200
+app_runner_url = "a3akknuhui.eu-west-1.awsapprunner.com" 
 rds_db_backup_retention_period          = 7
 domain_name = "staging.ascwds.co.uk"
 sfc_reports_instance_type = "t2.micro"
+node_env = "test"
